@@ -99,7 +99,7 @@ def login():
     json = request.get_json()
     filename = json['filename']
 
-    rand = int(random.random() * 104) + 1
+    rand = int(random.random() * 54) + 1
 
     getRow = f"select * from img_table where id = {rand};"
     print(getRow)
