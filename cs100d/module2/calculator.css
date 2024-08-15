@@ -1,0 +1,47 @@
+button{
+    width: 40px;
+}
+.main{
+    margin-left:auto;
+    margin-right:auto;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width:40%;
+    background-image: url('tenor.gif');
+    background-repeat: no-repeat;
+    padding-top:50px;
+}
+.title{
+    margin-left:auto;
+    margin-right:auto;
+}
+.display-bg{
+    height:20px;
+    width:175px;
+    background:pink;
+}
+.ratdiv{
+    width:100px;
+}
+.tablediv{
+    width:200px;
+}
+.circle-div{
+    width:100px;
+}
+#rat{
+    width:200px;
+}
+.table{
+    top: 50px;
+}
+#negative { 
+    visibility: hidden; 
+}
+.titlediv{
+    height:150px;
+}
+.parent{
+    margin:auto;
+}
+

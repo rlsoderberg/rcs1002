@@ -1,0 +1,35 @@
+<!--maybe do custom animations & whack a mole game later-->
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>skeleton page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- why are my comments different here than they are in module 2???
+    anyway, i'm making a javascript file to switch the gifs-->
+    <script src="some.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class = 'txt_div'>
+        <h class = 'title'>
+            SPOOKY SCARY SKELETONS
+        </h>
+        <p id="demo">
+            Click skeletons to shatter them.
+        </p>
+
+        <audio controls loop>
+            <source src="spookey.wav" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!--image with onclick that links to explode function in javascript file-->
+        <div>
+        <img id = "skel_img" src = "skel_dance.gif" onclick=explode();>
+        </div>
+    </div>
+ 
+</body>
+</html>

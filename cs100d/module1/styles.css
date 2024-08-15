@@ -1,0 +1,37 @@
+.skull{
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text{
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+body {
+    background-color: black;
+  }
+.title{
+    font-size:30px;
+    letter-spacing: 30px;
+}
+.txt_div{
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    color:white;
+    text-align:center;
+}
+.img_div{
+    margin:30px;
+}
+#square{
+    background-image: url('skel_dance.gif');
+    height: 320px;
+    width: 240px;
+    margin: 50px;
+}
+
+#button{
+    background-color: red;
+}

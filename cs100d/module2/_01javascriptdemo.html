@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Demo</title>
+    <script lang = 'javascript'>
+        function showname () {
+            //get access to the textbox with id name
+            var n = document.getElementById("word")
+            //get access to the textbox with id term
+            var t = document.getElementById("term")
+            //get access to the label we're writing on
+            var m = document.getElementById('message')
+        
+            if(n.value.includes(t.value)) {
+                m.innerHTML = 'word ' + n.value + ' contains term ' + t.value + '.'
+            }
+            else {
+                m.innerHTML = 'word ' + n.value + ' does not contain term ' + t.value + '.'
+            }
+
+
+            
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <p>What word would you like to search within?<input id = 'word' type = 'text'></p>
+        <p>What search term would you like to find?<input id = 'term' type = 'text'></p>
+        <p id = 'message'></p>
+    </div>
+    <div>
+        <button onclick = showname()>Submit</button>
+    </div>
+</body>
+</html>

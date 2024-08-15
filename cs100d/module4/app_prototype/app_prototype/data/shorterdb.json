@@ -1,0 +1,132 @@
+{
+    "images": [
+      {
+        "id": 1,
+        "filename": "1843.jpg",
+        "decade": "1840s",
+        "source": "The Metropolitan Museum of Art",
+        "info": "Former U.S. president John Quincy Adams - early dagguerotype by Philip Haas.",
+        "title": "First Presidential Photograph"
+      },
+      {
+        "id": 2,
+        "filename": "1862.jpg",
+        "decade": "1860s",
+        "source": "The Metropolitan Museum of Art",
+        "info": "U.S. President Abraham Lincoln visits Antietam Wood - photo by Alexander Gardner",
+        "title": "Civil War"
+      },
+      {
+        "id": 3,
+        "filename": "1884.jpg",
+        "decade": "1880s",
+        "source": "Library of Congress",
+        "info": "Workers build the Statue of Liberty - photo by Pierre Petit",
+        "title": "Statue of Liberty constructed"
+      },
+      {
+        "id": 4,
+        "filename": "1899p2.jpg",
+        "decade": "1890s",
+        "source": "Wellcome Collection Gallery",
+        "info": "Nikola Tesla sitting next to his Tesla coil - photo by Dickinson V. Alley",
+        "title": "Nikola Tesla - Tesla Coil"
+      },
+      {
+        "id": 5,
+        "filename": "1903p1.jpg",
+        "decade": "1900s",
+        "source": "Library of Congress",
+        "info": "First successful flight of the Wright Flyer, by the Wright brothers",
+        "title": "Wright Brothers - First Flight"
+      },
+      {
+        "id": 6,
+        "filename": "1918p1.jpg",
+        "decade": "1910s",
+        "source": "Library of Congress",
+        "info": "Red Cross ambulance attendants holding stretchers, awaiting influenza patients",
+        "title": "Spanish Flu"
+      },
+      {
+        "id": 7,
+        "filename": "1925.jpg",
+        "decade": "1920s",
+        "source": "Getty Images",
+        "info": "New York restaurant prevented from selling alcohol during the Prohibition",
+        "title": "Prohibition"
+      },   
+      {
+        "id": 8,
+        "filename": "1936p1.jpg",
+        "decade": "1930s",
+        "source": "U.S. Farm Security Administration/Office of War Information",
+        "info": "Migrant Mother, taken during the Dust Bowl - photo by Dorothea Lange",
+        "title": "Dust Bowl"
+      },
+      {
+        "id": 9,
+        "filename": "1945p1.jpg",
+        "decade": "1940s",
+        "source": "National Archives and Records Administration",
+        "info": "Slave laborers in the Buchenwald concentration camp are liberated",
+        "title": "Holocaust"
+      },
+      {
+        "id": 10,
+        "filename": "1959p2.jpg",
+        "decade": "1950s",
+        "source": "Mirisich Company",
+        "info": "Marilyn Monroe in the film 'Some Like It Hot'",
+        "title": "Marilyn Monroe - Some Like It Hot"
+      },
+      {
+        "id": 11,
+        "filename": "1969p2.jpg",
+        "decade": "1960s",
+        "source": "NASA Apollo Archive",
+        "info": "Astronaut Edwin E. Aldrin Jr. poses for a photograph during Apollo 11 mission",
+        "title": "Apollo 11 Lands on the Moon"
+      },
+      {
+        "id": 12,
+        "filename": "1977p2.jpg",
+        "decade": "1970s",
+        "source": "LucasFilm LTD",
+        "info": "Mark Hamill, Carrie Fisher, and Harrison Ford in the film 'Star Wars Episode IV: A New Hope'",
+        "title": "Star Wars: A New Hope"
+      },
+      {
+        "id": 13,
+        "filename": "1985p2.jpg",
+        "decade": "1980s",
+        "source": "Universal Pictures",
+        "info": "Michael J. Fox and Christopher Lloyd in the film 'Back to the Future'",
+        "title": "Back to the Future"
+      },
+      {
+        "id": 14,
+        "filename": "1994p1.jpg",
+        "decade": "1990s",
+        "source": "Columbia",
+        "info": "Mariah Carey's 'Merry Christmas' promotional photoshoot",
+        "title": "Mariah Carey - All I Want For Christmas Is You"
+      },
+      {
+        "id": 15,
+        "filename": "2001.jpg",
+        "decade": "2000s",
+        "source": "National Park Service",
+        "info": "September 11 attacks in New York City: View of the World Trade Center and the Statue of Liberty",
+        "title": "9/11 Attacks"
+      },
+      {
+        "id": 16,
+        "filename": "2018.jpg",
+        "decade": "2010s",
+        "source": "UltimateWarrior13",
+        "info": "Taylor Swift performing on her Reputation Stadium Tour",
+        "title": "Taylor Swift - Shake It Off"
+      }
+    ]
+  }
