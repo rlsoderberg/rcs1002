@@ -50,6 +50,12 @@ class Main extends React.Component {
             console.log(error)
         })
     }
+    
+    create_table() {
+        axios.get(this.urlbase + '/create_table').then((resp) => {
+            alert(resp.data)
+        })
+    }
 
     render() {
         const {filename, decade, title} = this.state
@@ -68,6 +74,7 @@ class Main extends React.Component {
                     <p>title: {title}</p>
                     <p>address: {address(filename)}</p>
                     <button type="button" onClick={this.login.bind(this)}>New Photo</button>
+                    <button onClick={this.create_table.bind(this)}>Create Table</button>
                 </div>
 
                 
