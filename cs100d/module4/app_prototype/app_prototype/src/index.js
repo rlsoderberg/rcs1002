@@ -8,7 +8,7 @@ class Main extends React.Component {
         super()
         //Initial data has no user or counts
         this.urlbase = 'http://localhost:5000'
-        //this.state = {rand:0, id: 0, filename:'', decade:'', source:'', info:'', title:''}
+        this.state = {rand:0, id: 0, filename:'', decade:'', source:'', info:'', title:'', userdecade:''}
         this.state = {filename: 'Untitled-1.jpg', decade: '1860s', title: 'Guess which decade the photo is from (1840s to 2010s)'}
     }
 
@@ -51,6 +51,33 @@ class Main extends React.Component {
         })
     }
 
+    arrow() {
+        const {userdecade} = this.state
+
+        let count = 0;
+
+        const counter = document.getElementById('counter');
+        const incrementBtn = document.getElementById('increment');
+        const decrementBtn = document.getElementById('decrement');
+        
+        incrementBtn.addEventListener('click', () => {
+            count = count + 10;
+            counter.textContent = count;
+        });
+        
+        decrementBtn.addEventListener('click', () => {
+            count = count - 10;
+            counter.textContent = count;
+        });
+
+        this.setState({...this.state, 
+            userdecade: count
+
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
     create_table() {
         axios.get(this.urlbase + '/create_table').then((resp) => {
             alert(resp.data)
@@ -76,6 +103,9 @@ class Main extends React.Component {
                     <button type="button" onClick={this.login.bind(this)}>New Photo</button>
                 </div>
 
+                <h1 id="counter">0</h1>
+                <button id="decrement" onClick={this.arrow.bind(this)}>-</button>
+                <button id="increment" onClick={this.arrow.bind(this)}>+</button>
                 
             </div>
         )
