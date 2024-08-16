@@ -9,7 +9,7 @@ class Main extends React.Component {
         //Initial data has no user or counts
         this.urlbase = 'http://localhost:5000'
         //this.state = {rand:0, id: 0, filename:'', decade:'', source:'', info:'', title:''}
-        this.state = {filename: 'dg_logo.png', decade: '1860s', title: 'Guess which decade the photo is from (1840s to 2010s)'}
+        this.state = {filename: 'Untitled-1.png', decade: '1860s', title: 'Guess which decade the photo is from (1840s to 2010s)'}
     }
 
     onLoginChange(e) {
@@ -50,7 +50,7 @@ class Main extends React.Component {
             console.log(error)
         })
     }
-    
+
     create_table() {
         axios.get(this.urlbase + '/create_table').then((resp) => {
             alert(resp.data)
@@ -74,7 +74,6 @@ class Main extends React.Component {
                     <p>title: {title}</p>
                     <p>address: {address(filename)}</p>
                     <button type="button" onClick={this.login.bind(this)}>New Photo</button>
-                    <button onClick={this.create_table.bind(this)}>Create Table</button>
                 </div>
 
                 

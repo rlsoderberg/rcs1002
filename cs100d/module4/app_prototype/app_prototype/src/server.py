@@ -25,7 +25,6 @@ def create_table():
             #host="http://127.0.0.1:5000",
             #port=3306,
             database="images"
-
         )
     except mariadb.Error as e:
         print(f"Error connecting to MariaDB Platform: {e}")
