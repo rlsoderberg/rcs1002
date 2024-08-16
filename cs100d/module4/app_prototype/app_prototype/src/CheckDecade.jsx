@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import "./index.css";
+import userdecade from "index.js";
 
 const IncrementDecrementBtn = ({ minValue = 0, maxValue = 100 }) => {
   const [count, setCount] = useState(minValue);

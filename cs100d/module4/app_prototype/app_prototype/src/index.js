@@ -10,7 +10,7 @@ class Main extends React.Component {
         //Initial data has no user or counts
         this.urlbase = 'http://localhost:5000'
         this.state = {rand:0, id: 0, filename:'', decade:'', source:'', info:'', title:'', userdecade:''}
-        this.state = {filename: 'Untitled-1.jpg', decade: '1860s', title: 'Guess which decade the photo is from (1840s to 2010s)'}
+        this.state = {filename: 'Untitled-1.jpg', decade: '1860s', title: 'Guess which decade the photo is from'}
     }
 
     onLoginChange(e) {
@@ -25,7 +25,7 @@ class Main extends React.Component {
     }
 
     login() {
-            const {filename, decade, title} = this.state
+            const {filename, decade, title, userdecade} = this.state
             var url = '/login'
             // Store the user's name in a JSON object
             const body = {'filename': filename}
@@ -97,13 +97,17 @@ class Main extends React.Component {
                     <img src = {address(filename)} width="500" height="300"></img>
                 </div>
 
-                <div className = 'desc'>
-                    <p>title:{title}</p>
-                    <button type="button" class = "newphoto" onClick={this.login.bind(this)}>New Photo</button>
+                <div className = 'container'>
+                    <p>{title}</p>
+                    <button type="button" class = "lrgbutton" onClick={this.login.bind(this)}>New Photo</button>
                 </div>
 
                 <div className="container">
                     <IncrementDecrementBtn minValue={1840} maxValue={2010} />
+                </div>
+
+                <div className = 'container'>
+                    <button type="button" class = "lrgbutton" onClick={this.check.bind(this)}>Submit</button>
                 </div>
                 
             </div>
