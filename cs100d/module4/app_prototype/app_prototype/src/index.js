@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
+import IncrementDecrementBtn from "./IncrementDecrementBtn";
 
 class Main extends React.Component {
     constructor() {
@@ -97,15 +98,13 @@ class Main extends React.Component {
                 </div>
 
                 <div className = 'desc'>
-                    <p>filename: {filename}</p>
-                    <p>title: {title}</p>
-                    <p>address: {address(filename)}</p>
-                    <button type="button" onClick={this.login.bind(this)}>New Photo</button>
+                    <p>title:{title}</p>
+                    <button type="button" class = "newphoto" onClick={this.login.bind(this)}>New Photo</button>
                 </div>
 
-                <h1 id="counter">0</h1>
-                <button id="decrement" onClick={this.arrow.bind(this)}>-</button>
-                <button id="increment" onClick={this.arrow.bind(this)}>+</button>
+                <div className="container">
+                    <IncrementDecrementBtn minValue={1840} maxValue={2010} />
+                </div>
                 
             </div>
         )
