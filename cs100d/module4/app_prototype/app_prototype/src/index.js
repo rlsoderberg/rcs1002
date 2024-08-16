@@ -9,7 +9,7 @@ class Main extends React.Component {
         //Initial data has no user or counts
         this.urlbase = 'http://localhost:5000'
         //this.state = {rand:0, id: 0, filename:'', decade:'', source:'', info:'', title:''}
-        this.state = {filename: 'Untitled-1.png', decade: '1860s', title: 'Guess which decade the photo is from (1840s to 2010s)'}
+        this.state = {filename: 'Untitled-1.jpg', decade: '1860s', title: 'Guess which decade the photo is from (1840s to 2010s)'}
     }
 
     onLoginChange(e) {
