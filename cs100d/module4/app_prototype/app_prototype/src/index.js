@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
-import IncrementDecrementBtn from "./IncrementDecrementBtn";
+import count, IncrementDecrementBtn from "./IncrementDecrementBtn";
+import SubmitBtn from "./Submit";
 
 class Main extends React.Component {
     constructor() {
@@ -107,7 +108,7 @@ class Main extends React.Component {
                 </div>
 
                 <div className = 'container'>
-                    <button type="button" class = "lrgbutton" onClick={this.check.bind(this)}>Submit</button>
+                    <SubmitBtn userCount = {count} />
                 </div>
                 
             </div>
@@ -117,3 +118,4 @@ class Main extends React.Component {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Main />);
+export const decade;
