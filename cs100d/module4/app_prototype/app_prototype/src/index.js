@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
-import count, IncrementDecrementBtn from "./IncrementDecrementBtn";
+import {IncrementDecrementBtn, count} from "./IncrementDecrementBtn";
 import SubmitBtn from "./Submit";
 
 class Main extends React.Component {
@@ -118,4 +118,3 @@ class Main extends React.Component {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Main />);
-export const decade;

@@ -32,4 +32,3 @@ const IncrementDecrementBtn = ({ minValue = 0, maxValue = 100 }) => {
 };
 
 export default IncrementDecrementBtn;
-export const count;
