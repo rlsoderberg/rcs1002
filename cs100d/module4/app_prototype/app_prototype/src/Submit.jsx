@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import IncrementDecrementBtn from "./IncrementDecrementBtn";
 
-const IncrementDecrementBtn = ({ count }) => {
+const SubmitBtn = ({ count }) => {
     const [userCount, setUserCount] = count();
 
-    const handleClick = () => {
-        setUserCount((prevState) => prevState + 10);
-      };
+    const check = () => {
+      if (count < maxValue) {
+        setUserCount((prevState) => userCount);
+      }
+    };
 
     return (
-        <button type="button" class = "lrgbutton" onClick={this.check.bind(this)}>Submit</button>
+      <SubmitBtn userCount = {count} onClick={check}/>
     );
   };
 

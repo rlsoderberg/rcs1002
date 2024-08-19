@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
-import {IncrementDecrementBtn, count} from "./IncrementDecrementBtn";
-import SubmitBtn from "./Submit";
+import {IncrementDecrementBtn} from "./IncrementDecrementBtn";
+import {count} from "./IncrementDecrementBtn";
+import {SubmitBtn} from "./Submit";
 
 class Main extends React.Component {
     constructor() {
@@ -108,7 +109,7 @@ class Main extends React.Component {
                 </div>
 
                 <div className = 'container'>
-                    <SubmitBtn userCount = {count} />
+                    <SubmitBtn userCount = {count} onClick={check}/>
                 </div>
                 
             </div>
