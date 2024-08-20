@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
 import {IncrementDecrementBtn} from "./IncrementDecrementBtn";
-import {count} from "./IncrementDecrementBtn";
-import {SubmitBtn} from "./Submit";
+import SubmitBtn from "./Submit";
 
 class Main extends React.Component {
     constructor() {
         super()
         //Initial data has no user or counts
         this.urlbase = 'http://localhost:5000'
-        this.state = {rand:0, id: 0, filename:'', decade:'', source:'', info:'', title:'', userdecade:''}
+        this.state = {rand:0, id: 0, filename:'', decade:'', source:'', info:'', title:'', count: '', result: ''}
         this.state = {filename: 'Untitled-1.jpg', decade: '1860s', title: 'Guess which decade the photo is from'}
     }
 
@@ -27,7 +26,7 @@ class Main extends React.Component {
     }
 
     login() {
-            const {filename, decade, title, userdecade} = this.state
+            const {filename, decade, title, userdecade, count} = this.state
             var url = '/login'
             // Store the user's name in a JSON object
             const body = {'filename': filename}
@@ -55,9 +54,7 @@ class Main extends React.Component {
     }
 
     arrow() {
-        const {userdecade} = this.state
-
-        let count = 0;
+        const {count} = this.state
 
         const counter = document.getElementById('counter');
         const incrementBtn = document.getElementById('increment');
@@ -88,7 +85,7 @@ class Main extends React.Component {
     }
 
     render() {
-        const {filename, decade, title} = this.state
+        const {filename, decade, title, count} = this.state
         console.log(filename)
         const address = (filename) => {
             return './popdecades/' + filename;
@@ -106,10 +103,11 @@ class Main extends React.Component {
 
                 <div className="container">
                     <IncrementDecrementBtn minValue={1840} maxValue={2010} />
+                    <p>count:{count}</p>
                 </div>
 
                 <div className = 'container'>
-                    <SubmitBtn userCount = {count} onClick={check}/>
+                    <SubmitBtn userCount = {count}/>
                 </div>
                 
             </div>

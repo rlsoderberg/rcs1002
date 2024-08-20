@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 
 const SubmitBtn = ({ count }) => {
-    const [userCount, setUserCount] = count();
+    const {count, result} = this.state
 
-    const check = () => {
-      if (count < maxValue) {
-        setUserCount((prevState) => userCount);
+    const check() {
+      if (count === decade) {
+        result = 'win'
       }
-    };
+      result = 'lose'
+    }
 
     return (
-      <SubmitBtn userCount = {count} onClick={check}/>
+      <SubmitBtn count = {count} decade = {decade}/>
     );
   };
 

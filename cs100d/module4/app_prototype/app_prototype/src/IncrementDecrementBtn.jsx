@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import "./index.css";
 
-const IncrementDecrementBtn = ({ minValue = 0, maxValue = 100 }) => {
+export const IncrementDecrementBtn = ({ minValue = 0, maxValue = 100 }) => {
   const [count, setCount] = useState(minValue);
 
   const handleIncrementCounter = () => {
