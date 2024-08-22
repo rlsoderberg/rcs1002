@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SubmitBtn = () => {
+function SubmitBtn(){
     const {count, decade, result} = this.state
 
     const handleClick = () => {

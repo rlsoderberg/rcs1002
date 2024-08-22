@@ -8,12 +8,17 @@ export const IncrementDecrementBtn = ({ minValue = 0, maxValue = 100 }) => {
 
   const handleIncrementCounter = () => {
     if (count < maxValue) {
-      setCount((prevState) => prevState + 10);
+      //i saw someone doing it like this, and that way, there's no prevState, which is confusing
+      //this.setCount.bind(this + 10);
+      //possibly
+      ////this.setCount = this.setCount.bind(this + 10);
+      this.setCount((prevState) => prevState + 10);
     }
   };
 
   const handleDecrementCounter = () => {
     if (count > minValue) {
+      //this.setCount.bind(this - 10);
       setCount((prevState) => prevState - 10);
     }
   };
