@@ -17,7 +17,7 @@ function Main() {
     info:'', 
     count: '', 
     result: ''
-})
+});
   /*
     constructor() {
         super()
@@ -27,19 +27,14 @@ function Main() {
         this.state = {filename: 'Untitled-1.jpg', decade: '1860s', title: 'Guess which decade the photo is from'}
     }
   */
-
-    onLoginChange() {
-        //Keep track of the login value
-        this.setFilename({e.target.value}) 
-    }   
     
-    create_table() {
+    function create_table() {
         axios.get(this.urlbase + '/create_table').then((resp) => {
             alert(resp.data)
         })
     }
 
-    login() {
+    function login() {
             const {filename, decade, title, userdecade, count} = this.state
             var url = '/login'
             // Store the user's name in a JSON object
@@ -67,7 +62,7 @@ function Main() {
         })
     }
 
-    arrow() {
+    function arrow() {
         const {count} = this.state
 
         const counter = document.getElementById('counter');
@@ -92,13 +87,13 @@ function Main() {
         })
     }
 
-    create_table() {
+    function create_table() {
         axios.get(this.urlbase + '/create_table').then((resp) => {
             alert(resp.data)
         })
     }
 
-    render() {
+    function render() {
         const {filename, decade, title, count} = this.state
         console.log(filename)
         const address = (filename) => {
