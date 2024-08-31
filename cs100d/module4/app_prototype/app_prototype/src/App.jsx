@@ -68,8 +68,7 @@ function Main() {
         const counter = document.getElementById('counter');
         const incrementBtn = document.getElementById('increment');
         const decrementBtn = document.getElementById('decrement');
-/* 
-it doesn't like me changing the const count       
+        
         incrementBtn.addEventListener('click', () => {
             count = count + 10;
             counter.textContent = count;
@@ -79,7 +78,7 @@ it doesn't like me changing the const count
             count = count - 10;
             counter.textContent = count;
         });
-*/
+
         this.setState({...this.state, 
             userdecade: count
 
