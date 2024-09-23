@@ -4,13 +4,20 @@ import os
 import sys
 from read_data import lines
 import pymysql
+import random
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/resetdb')
-def reset():
-    # Make sure you modify this connection string to connect to your database, and not mine.
+
+# Test API
+@app.route('/')
+def index():
+    return 'Hello World'
+
+@app.route('/create_table')
+def create_table():
+    # Connect to MySQL
     conn = pymysql.connect(host='localhost', user='root', password='2101', database='img_db')
     conn.autocommit(True)
     crsr = conn.cursor()
@@ -25,36 +32,10 @@ def reset():
     crsr.execute(sql)
     sql = 'CREATE TABLE `tracker`.`login` (`id` INT NOT NULL AUTO_INCREMENT,`userid` INT NULL,`date` DATETIME, PRIMARY KEY (`id`), FOREIGN KEY (userid) REFERENCES `user`(id));'
     crsr.execute(sql)
-
-    return 'Reset Successful'
-
-'''
-# Test API
-@app.route('/')
-def index():
-    return 'Hello World'
-
-@app.route('/create_table')
-def create_table():
-    # Connect to MariaDB Platform
-    try:
-        conn = mariadb.connect(
-            user="root",
-            password="2101",
-            #host="http://127.0.0.1:5000",
-            #port=3306,
-            database="images"
-        )
-    except mariadb.Error as e:
-        print(f"Error connecting to MariaDB Platform: {e}")
-        sys.exit(1)
-
-    conn.autocommit(True)
-    mycursor = conn.cursor()
     
-    mycursor.execute("Show databases;")
+    crsr.execute("Show databases;")
     
-    myresult = mycursor.fetchall()
+    myresult = crsr.fetchall()
     
     for x in myresult:
         print(x)
@@ -72,22 +53,20 @@ def create_table():
         return linelist
 
     delet = 'DROP TABLE IF EXISTS `img_table`;'
-    mycursor.execute(delet)
+    crsr.execute(delet)
 
     sql = 'CREATE TABLE `img_table` (`id` INT NOT NULL AUTO_INCREMENT, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
-    mycursor.execute(sql)
+    crsr.execute(sql)
 
     #insert values while looping
     for x in range(0, len(lines), 5):
         linelist = loadpic(x, lines)
         (line0, line1, line2, line3, line4) = linelist
-        try: mycursor.execute("INSERT INTO img_table (filename, decade, source, info, title) VALUES (%s, %s, %s, %s, %s)", (line0, line1, line2, line3, line4))
-        except mariadb.Error as e: 
-            print(f"Error: {e}")
+        crsr.execute("INSERT INTO img_table (filename, decade, source, info, title) VALUES (%s, %s, %s, %s, %s)", (line0, line1, line2, line3, line4))
         print('line0: ' + line0)
 
         conn.commit() 
-        print(f"Last Inserted ID: {mycursor.lastrowid}")
+        print(f"Last Inserted ID: {crsr.lastrowid}")
         
     print('done')
     conn.close()
@@ -97,22 +76,10 @@ def create_table():
 
 @app.route('/login', methods=['POST'])
 def login():
-    # Connect to MariaDB Platform
-    try:
-        conn = mariadb.connect(
-            user="root",
-            password="2101",
-            #host="http://127.0.0.1:5000",
-            #port=3306,
-            database="images"
-
-        )
-    except mariadb.Error as e:
-        print(f"Error connecting to MariaDB Platform: {e}")
-        sys.exit(1)
-
-    mycursor = conn.cursor()
-
+    # Connect to MySQL
+    conn = pymysql.connect(host='localhost', user='root', password='2101', database='img_db')
+    conn.autocommit(True)
+    crsr = conn.cursor()
 
     json = request.get_json()
     filename = json['filename']
@@ -121,9 +88,9 @@ def login():
 
     getRow = f"select * from img_table where id = {rand};"
     print(getRow)
-    mycursor.execute(getRow)
+    crsr.execute(getRow)
 
-    myresult = mycursor.fetchall()
+    myresult = crsr.fetchall()
 
     print(myresult)
 
@@ -139,4 +106,3 @@ def login():
 
 if __name__ == '__main__':
     app.run()
-'''

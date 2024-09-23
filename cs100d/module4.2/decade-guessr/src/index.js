@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import create_table from server.py
+
 /*
 from fetch_data import result_row
 
@@ -70,6 +72,7 @@ class Main extends React.Component {
                         Info: {info}<br />
                         Title: {title}<br />
                     </p>
+                    <button onClick={this.create_table.bind(this)}>Reset Database</button>
                 </div>
 
                 
