@@ -11,12 +11,7 @@ CORS(app)
 @app.route('/resetdb')
 def reset():
     # Make sure you modify this connection string to connect to your database, and not mine.
-    server = os.environ['DATAHOST']
-    user = os.environ['DATAUSER']
-    pwd = os.environ['DATAPWD']
-    db = os.environ['DATADATABASE']
-
-    conn = pymysql.connect(host=server, user=user, password=pwd, database=db)
+    conn = pymysql.connect(host='localhost', user='root', password='2101', database='img_db')
     conn.autocommit(True)
     crsr = conn.cursor()
 
