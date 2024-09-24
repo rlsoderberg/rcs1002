@@ -17,6 +17,11 @@ class Main extends React.Component {
         alert(resp.data)
     })
   }
+  resetdb() {
+    axios.get(this.urlbase + '/resetdb').then((resp) => {
+        alert(resp.data)
+    })
+}
   /*
     getnext() {
       
@@ -53,7 +58,7 @@ class Main extends React.Component {
                           Info: {info}<br />
                           Title: {title}<br />
                       </p>
-                      <button onClick={this.getnext.bind(this)}>Next Photo</button>
+                      <button onClick={this.resetdb.bind(this)}>Next Photo</button>
                   </div>                  
               </div>
                 )

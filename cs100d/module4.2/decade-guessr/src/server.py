@@ -5,6 +5,8 @@ import sys
 from read_data import lines
 import pymysql
 import random
+import axios from 'axios';
+
 
 app = Flask(__name__)
 CORS(app)
@@ -18,7 +20,12 @@ def index():
 @app.route('/create_table')
 def create_table():
     # Connect to MySQL
-    conn = pymysql.connect(host='localhost', user='root', password='2101', database='img_db')
+    server = os.environ['DATAHOST']
+    user = os.environ['DATAUSER']
+    pwd = os.environ['DATAPWD']
+    db = os.environ['DATADATABASE']
+
+    conn = pymysql.connect(host=server, user=user, password=pwd, database=db)
     conn.autocommit(True)
     crsr = conn.cursor()
 
@@ -101,6 +108,26 @@ def nextphoto():
 
     #return jsonify({'filename': filename, 'title':title, 'decade':decade})
     return decade
+
+@app.route('/resetdb')
+def reset():
+    # Make sure you modify this connection string to connect to your database, and not mine.
+    conn = pymysql.connect(host='localhost', user='root', password='password', database='northwind')
+    conn.autocommit(True)
+    crsr = conn.cursor()
+
+    # Drop the tables if they already exist
+    sql = 'DROP TABLE IF EXISTS `tracker`.`login`;'
+    crsr.execute(sql)
+    sql = 'DROP TABLE IF EXISTS `tracker`.`user`;'
+    crsr.execute(sql)
+    # Create the two tables we'll need for our app
+    sql = 'CREATE TABLE `tracker`.`user` (`id` INT NOT NULL AUTO_INCREMENT,`login` VARCHAR(255) NULL, PRIMARY KEY (`id`));'
+    crsr.execute(sql)
+    sql = 'CREATE TABLE `tracker`.`login` (`id` INT NOT NULL AUTO_INCREMENT,`userid` INT NULL,`date` DATETIME, PRIMARY KEY (`id`), FOREIGN KEY (userid) REFERENCES `user`(id));'
+    crsr.execute(sql)
+
+    return 'Reset Successful'
 
 if __name__ == '__main__':
     app.run()
