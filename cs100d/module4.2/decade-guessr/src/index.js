@@ -7,11 +7,12 @@ class Main extends React.Component {
   constructor() {
     super()
     //Initial data has no user or counts
-    this.state = {filename: null, decade: null, copyright: null, info: null, title: null}
+    this.state = {filename: 'elves.jpg', decade: '1910s', copyright: 'Santa Corp', info: 'Elves quarterly secret meeting, 1912', title: 'Elves Secret Meeting'}
     this.urlbase = 'http://127.0.0.1:5000'
 }
     
     getnext() {
+      console.log('nexted')
       const {user} = this.state
       var url = '/login'
       // Store the user's name in a JSON object
@@ -26,12 +27,12 @@ class Main extends React.Component {
           headers: headers,
           data: body
       }
+    }
   
       render() {
           const {filename, decade, copyright, info, title} = this.state
           return (
               <div className='Main'>
-
                   <div className = 'img'>
                       <img src = 'img_path'></img>
                   </div>
@@ -44,15 +45,12 @@ class Main extends React.Component {
                           Info: {info}<br />
                           Title: {title}<br />
                       </p>
-                      <button onClick={this.nextfunction.bind(this)}>Next Photo</button>
-                  </div>
-
-                  
+                      <button onClick={this.getnext.bind(this)}>Next Photo</button>
+                  </div>                  
               </div>
                 )
-          }
+              }
   }
-}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Main />);
