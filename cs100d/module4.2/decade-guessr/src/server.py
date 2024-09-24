@@ -74,7 +74,7 @@ def create_table():
     return 'Reset Successful'
 
 
-@app.route('/nextphoto', methods=['POST'])
+@app.route('/nextphoto', methods=['GET'])
 def nextphoto():
     # Connect to MySQL
     conn = pymysql.connect(host='localhost', user='root', password='2101', database='img_db')
@@ -99,10 +99,8 @@ def nextphoto():
 
     print('filename: '+filename)
 
-    # json = request.get_json()
-    # filename = json['filename']
-
-    return jsonify({'filename': filename, 'title':title, 'decade':decade})
+    #return jsonify({'filename': filename, 'title':title, 'decade':decade})
+    return decade
 
 if __name__ == '__main__':
     app.run()

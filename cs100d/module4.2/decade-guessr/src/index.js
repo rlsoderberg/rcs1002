@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import nextphoto from './server.py';
+import axios from 'axios';
 
 class Main extends React.Component {
   constructor() {
@@ -10,9 +11,15 @@ class Main extends React.Component {
     this.state = {filename: 'elves.jpg', decade: '1910s', copyright: 'Santa Corp', info: 'Elves quarterly secret meeting, 1912', title: 'Elves Secret Meeting'}
     this.urlbase = 'http://127.0.0.1:5000'
 }
-    
+  getnext() {
+    console.log('nexted')
+    axios.get(this.urlbase + '/nextphoto').then((resp) => {
+        alert(resp.data)
+    })
+  }
+  /*
     getnext() {
-      console.log('nexted')
+      
       const {user} = this.state
       var url = '/login'
       // Store the user's name in a JSON object
@@ -23,11 +30,12 @@ class Main extends React.Component {
       const config = {
           url: url,
           baseURL: this.urlbase,
-          method: 'POST',
+          method: 'GET',
           headers: headers,
           data: body
       }
     }
+      */
   
       render() {
           const {filename, decade, copyright, info, title} = this.state
