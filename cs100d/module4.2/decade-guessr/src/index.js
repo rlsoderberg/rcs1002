@@ -17,12 +17,11 @@ class Main extends React.Component {
         this.state = {filename: null, decade: null, copyright: null, info: null, title: null}
         this.urlbase = 'http://127.0.0.1:5000'
     }
-    /*
+    
     resetdb() {
-        axios.get(this.urlbase + '/resetdb').then((resp) => {
-            alert(resp.data)
-        })
+        create_table()
     }
+    /*
 ]   
     onLoginChange(e) {
         //Keep track of the login value
@@ -72,7 +71,7 @@ class Main extends React.Component {
                         Info: {info}<br />
                         Title: {title}<br />
                     </p>
-                    <button onClick={this.create_table.bind(this)}>Reset Database</button>
+                    <button onClick={this.resetdb.bind(this)}>Reset Database</button>
                 </div>
 
                 
