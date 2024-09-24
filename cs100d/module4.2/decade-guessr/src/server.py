@@ -74,8 +74,8 @@ def create_table():
     return 'Reset Successful'
 
 
-@app.route('/login', methods=['POST'])
-def login():
+@app.route('/nextphoto', methods=['POST'])
+def nextphoto():
     # Connect to MySQL
     conn = pymysql.connect(host='localhost', user='root', password='2101', database='img_db')
     conn.autocommit(True)
