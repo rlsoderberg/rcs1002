@@ -58,7 +58,7 @@ class Main extends React.Component {
                           Info: {info}<br />
                           Title: {title}<br />
                       </p>
-                      <button onClick={this.resetdb.bind(this)}>Next Photo</button>
+                      <button onClick={this.resetdb.bind(this)}>Reset DB</button>
                   </div>                  
               </div>
                 )

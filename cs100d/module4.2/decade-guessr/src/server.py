@@ -5,7 +5,6 @@ import sys
 from read_data import lines
 import pymysql
 import random
-import axios from 'axios';
 
 
 app = Flask(__name__)
@@ -111,8 +110,9 @@ def nextphoto():
 
 @app.route('/resetdb')
 def reset():
+    print('connecting')
     # Make sure you modify this connection string to connect to your database, and not mine.
-    conn = pymysql.connect(host='localhost', user='root', password='password', database='northwind')
+    conn = pymysql.connect(host='localhost', user='root', password='2101', database='img_db')
     conn.autocommit(True)
     crsr = conn.cursor()
 

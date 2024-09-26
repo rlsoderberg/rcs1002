@@ -2,3 +2,4 @@ flask
 flask-cors
 mariadb
 python-dotenv
+axios
