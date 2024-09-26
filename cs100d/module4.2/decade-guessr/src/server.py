@@ -129,5 +129,41 @@ def reset():
 
     return 'Reset Successful'
 
+@app.route('/login')
+def login():
+    # Connect to MySQL
+    server = os.environ['DATAHOST']
+    user = os.environ['DATAUSER']
+    pwd = os.environ['DATAPWD']
+    db = os.environ['DATADATABASE']
+
+    conn = pymysql.connect(host=server, user=user, password=pwd, database=db)
+    conn.autocommit(True)
+    crsr = conn.cursor()
+
+
+    json = request.get_json()
+    filename = json['filename']
+
+    rand = int(random.random() * 104) + 1
+
+    getRow = f"select * from img_table where id = {rand};"
+    print(getRow)
+    crsr.execute(getRow)
+
+    myresult = crsr.fetchall()
+
+    print(myresult)
+
+    for n in myresult:
+        (id, filename, decade, source, info, title) = n
+
+    print('filename: '+filename)
+
+    # json = request.get_json()
+    # filename = json['filename']
+
+    return jsonify({'filename': filename, 'decade': decade, 'source':source, 'info':info, 'title':title})
+
 if __name__ == '__main__':
     app.run()
