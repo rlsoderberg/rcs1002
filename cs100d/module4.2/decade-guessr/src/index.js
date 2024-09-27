@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import nextphoto from './server.py';
 import axios from 'axios';
 
 class Main extends React.Component {
@@ -15,9 +14,9 @@ class Main extends React.Component {
         alert(resp.data)
     })
 }
-login() {
-  const {filename, decade, title} = this.state
-  var url = '/login'
+nextphoto() {
+  const {filename} = this.state
+  var url = '/nextphoto'
   // Store the user's name in a JSON object
   const body = {'filename': filename}
   // We're sending JSON data to our server
@@ -39,7 +38,9 @@ axios(config).then((resp) => {
 }).catch(error => {
   console.log(error)
 })
+console.log(filename)
 }
+
   
       render() {
           const {filename} = this.state
@@ -57,7 +58,8 @@ axios(config).then((resp) => {
                           Filename: {filename} <br />
                           Address: {address(filename)}
                       </p>
-                      <button type="button" onClick={this.login.bind(this)}>New Photo</button>
+                      <button onClick={this.resetdb.bind(this)}>Reset DB</button>
+                      <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button>
                   </div>                  
               </div>
                 )
