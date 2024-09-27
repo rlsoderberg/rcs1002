@@ -28,24 +28,12 @@ def create_table():
     conn.autocommit(True)
     crsr = conn.cursor()
 
-    # Drop the tables if they already exist
-    sql = 'DROP TABLE IF EXISTS `tracker`.`login`;'
-    crsr.execute(sql)
-    sql = 'DROP TABLE IF EXISTS `tracker`.`user`;'
-    crsr.execute(sql)
-    # Create the two tables we'll need for our app
-    sql = 'CREATE TABLE `tracker`.`user` (`id` INT NOT NULL AUTO_INCREMENT,`login` VARCHAR(255) NULL, PRIMARY KEY (`id`));'
-    crsr.execute(sql)
-    sql = 'CREATE TABLE `tracker`.`login` (`id` INT NOT NULL AUTO_INCREMENT,`userid` INT NULL,`date` DATETIME, PRIMARY KEY (`id`), FOREIGN KEY (userid) REFERENCES `user`(id));'
-    crsr.execute(sql)
-    
-    crsr.execute("Show databases;")
-    
-    myresult = crsr.fetchall()
-    
-    for x in myresult:
-        print(x)
+    delet = 'DROP TABLE IF EXISTS `img_table`;'
+    crsr.execute(delet)
 
+    sql = 'CREATE TABLE `img_table` (`id` INT NOT NULL AUTO_INCREMENT, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
+    crsr.execute(sql)
+    
     def loadpic(x, lines):
         #assign variables to different lines of data file (is there an easy way to do this better?)
         #make sure to have the right number of things!!!
@@ -57,12 +45,6 @@ def create_table():
 
         linelist = (line0, line1, line2, line3, line4)
         return linelist
-
-    delet = 'DROP TABLE IF EXISTS `img_table`;'
-    crsr.execute(delet)
-
-    sql = 'CREATE TABLE `img_table` (`id` INT NOT NULL AUTO_INCREMENT, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
-    crsr.execute(sql)
 
     #insert values while looping
     for x in range(0, len(lines), 5):
@@ -163,7 +145,7 @@ def login():
     # json = request.get_json()
     # filename = json['filename']
 
-    return jsonify({'filename': filename, 'decade': decade, 'source':source, 'info':info, 'title':title})
+    return jsonify({'filename': filename})
 
 if __name__ == '__main__':
     app.run()
