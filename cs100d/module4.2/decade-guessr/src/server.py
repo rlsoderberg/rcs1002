@@ -29,8 +29,8 @@ def loadpic(x, lines):
     linelist = (line0, line1, line2, line3, line4)
     return linelist
 
-@app.route('/nextphoto')
-def nextphoto():
+@app.route('/createtable')
+def createtable():
     print('nextphoto init')
     # Connect to MySQL
     server = os.environ['DATAHOST']
@@ -75,11 +75,28 @@ def nextphoto():
         if(x > 60):
             print(f"Last Inserted ID: {crsr.lastrowid}")
 
+        return 'Reset Successful'
+
+@app.route('/nextphoto')
+def nextphoto():
+    print('nextphoto init')
+    # Connect to MySQL
+    server = os.environ['DATAHOST']
+    user = os.environ['DATAUSER']
+    pwd = os.environ['DATAPWD']
+    db = os.environ['DATADATABASE']
+
+    conn = pymysql.connect(host=server, user=user, password=pwd, database=db)
+    conn.autocommit(True)
+    crsr = conn.cursor()
+    print('connected with' + crsr)
+
+
     #Select random number
     rand = int(random.random() * 104) + 1
     print('random number: ' + rand)
 
-    #Select row with random number in sql
+    #Select row with random number in sql+-
     getRow = f"select * from img_table where id = {rand};"
     crsr.execute(getRow)
 

@@ -9,8 +9,8 @@ class Main extends React.Component {
     this.state = {filename: 'dglogo.jpg'}
     this.urlbase = 'http://127.0.0.1:5000'
 }
-  resetdb() {
-    axios.get(this.urlbase + '/resetdb').then((resp) => {
+  createtable() {
+    axios.get(this.urlbase + '/createtable').then((resp) => {
         alert(resp.data)
     })
 }
@@ -58,7 +58,7 @@ console.log(filename)
                           Filename: {filename} <br />
                           Address: {address(filename)}
                       </p>
-                      <button onClick={this.resetdb.bind(this)}>Reset DB</button>
+                      <button onClick={this.createtable.bind(this)}>Reset DB</button>
                       <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button>
                   </div>                  
               </div>
