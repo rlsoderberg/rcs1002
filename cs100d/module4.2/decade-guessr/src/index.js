@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
-import {useState} from 'react';
 
 class Main extends React.Component {
   constructor() {
@@ -10,12 +9,10 @@ class Main extends React.Component {
     this.state = {filename: 'dglogo.jpg'}
     this.urlbase = 'http://127.0.0.1:5000'
 }
-  createtable() {
-    axios.get(this.urlbase + '/createtable')
-    .then((resp) => {
-        alert(resp.data)
-        setSuccess(resp.data.content)
-    })
+createtable() {
+  axios.get(this.urlbase + '/createtable').then((resp) => {
+      alert(resp.data)
+  })
 }
 nextphoto() {
   const {filename} = this.state
@@ -34,19 +31,24 @@ nextphoto() {
   }
   //i don't get any of these consts up here! i tried deleting them, but apparently you HAVE to define config! i mean... it is used in this axios thing
   //what i don't get, is the difference between this and resetdb! 
-axios(config).then((resp) => {
+  axios.get(this.urlbase + '/nextphoto')
+  .then((resp) => {
+      alert(resp.data)})
+}
+
+/*axios(config).then((resp) => {
   this.setState({...this.state, 
       filename: resp.data['filename']
   })
 }).catch(error => {
-  console.log(error)
+  console.log(error.response.data)
 })
 console.log(filename)
-}
+*/
+
 
   
       render() { 
-          const [success, setSuccess] = useState('')
           const {filename} = this.state
           const address = (filename) => {
             return './photos/' + filename;
@@ -61,7 +63,6 @@ console.log(filename)
                       <p>
                           Filename: {filename} <br />
                           Address: {address(filename)}
-                          Success: {success}
                       </p>
                       <button onClick={this.createtable.bind(this)}>Reset DB</button>
                       <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button>

@@ -29,7 +29,7 @@ def loadpic(x, lines):
     linelist = (line0, line1, line2, line3, line4)
     return linelist
 
-@app.route('/createtable')
+@app.route('/createtable', methods=['POST'])
 def createtable():
     print('nextphoto init')
     # Connect to MySQL
@@ -77,7 +77,7 @@ def createtable():
 
     return 'Reset Successful'
 
-@app.route('/nextphoto')
+@app.route('/nextphoto', methods=['POST'])
 def nextphoto():
     print('nextphoto init')
     # Connect to MySQL
