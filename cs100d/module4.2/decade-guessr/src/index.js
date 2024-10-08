@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
+import {useState} from 'react';
 
 class Main extends React.Component {
   constructor() {
@@ -10,8 +11,10 @@ class Main extends React.Component {
     this.urlbase = 'http://127.0.0.1:5000'
 }
   createtable() {
-    axios.get(this.urlbase + '/createtable').then((resp) => {
+    axios.get(this.urlbase + '/createtable')
+    .then((resp) => {
         alert(resp.data)
+        setSuccess(resp.data.content)
     })
 }
 nextphoto() {
@@ -42,7 +45,8 @@ console.log(filename)
 }
 
   
-      render() {
+      render() { 
+          const [success, setSuccess] = useState('')
           const {filename} = this.state
           const address = (filename) => {
             return './photos/' + filename;
@@ -57,6 +61,7 @@ console.log(filename)
                       <p>
                           Filename: {filename} <br />
                           Address: {address(filename)}
+                          Success: {success}
                       </p>
                       <button onClick={this.createtable.bind(this)}>Reset DB</button>
                       <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button>

@@ -75,7 +75,7 @@ def createtable():
         if(x > 60):
             print(f"Last Inserted ID: {crsr.lastrowid}")
 
-        return 'Reset Successful'
+    return 'Reset Successful'
 
 @app.route('/nextphoto')
 def nextphoto():
