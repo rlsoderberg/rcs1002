@@ -91,6 +91,11 @@ def nextphoto():
     crsr = conn.cursor()
     print('connected with' + crsr)
 
+    json = request.get_json()
+    filename = json['filename']
+
+    return jsonify({'filename': filename})
+
 
     #Select random number
     rand = int(random.random() * 104) + 1
@@ -110,12 +115,6 @@ def nextphoto():
 
     print(filename)
     return filename
-
-    #i don't know about all this json stuff!!! so i am commenting it for now
-    # json = request.get_json()
-    # filename = json['filename']
-
-    #return jsonify({'filename': filename})
 
 
 
