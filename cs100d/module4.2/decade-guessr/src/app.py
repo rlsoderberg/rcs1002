@@ -38,6 +38,7 @@ def createtable():
     pwd = os.environ['DATAPWD']
     db = os.environ['DATADATABASE']
 
+    #i just put in the actual values to check! the .env might be working!
     conn = pymysql.connect(host=server, user=user, password=pwd, database=db)
     conn.autocommit(True)
     crsr = conn.cursor()
@@ -91,12 +92,6 @@ def nextphoto():
     crsr = conn.cursor()
     print('connected with' + crsr)
 
-    json = request.get_json()
-    filename = json['filename']
-
-    return jsonify({'filename': filename})
-
-
     #Select random number
     rand = int(random.random() * 104) + 1
     print('random number: ' + rand)
@@ -111,10 +106,12 @@ def nextphoto():
     print(myresult)
 
     for n in myresult:
-        (id, filename, decade, source, info, title) = n
+        #(id, filename, decade, source, info, title) = n
+        (filename) = n
+    json = request.get_json()
+    filename = json['filename']
 
-    print(filename)
-    return filename
+    return jsonify({'filename': filename})
 
 
 

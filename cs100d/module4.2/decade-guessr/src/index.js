@@ -49,6 +49,7 @@ console.log(filename)
 
   
       render() { 
+        
           const {filename} = this.state
           const address = (filename) => {
             return './photos/' + filename;
@@ -71,6 +72,7 @@ console.log(filename)
                 )
               }
   }
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Main />);
