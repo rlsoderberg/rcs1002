@@ -31,9 +31,20 @@ nextphoto() {
   }
   //i don't get any of these consts up here! i tried deleting them, but apparently you HAVE to define config! i mean... it is used in this axios thing
   //what i don't get, is the difference between this and resetdb! 
+
+  axios(config).then((resp) => {
+    this.setState({...this.state, 
+        filename: resp.data['filename']
+    })
+  }).catch(error => {
+    console.log(error.response.data)
+  })
+  console.log(filename)
+  /*
   axios.get(this.urlbase + '/nextphoto')
   .then((resp) => {
       alert(resp.data)})
+  */
 }
 
 /*axios(config).then((resp) => {
