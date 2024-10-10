@@ -25,7 +25,7 @@ nextphoto() {
   const config = {
       url: url,
       baseURL: this.urlbase,
-      method: 'POST',
+      method: 'GET',
       headers: headers,
       data: body
   }
