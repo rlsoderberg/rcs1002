@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
+import NumberPicker from "react-widgets/NumberPicker";
 
 class Main extends React.Component {
   constructor() {
     super()
-    this.state = {filename: 'dglogo.jpg'}
+    this.state = {value:'0', id:'0', filename:'null.jpg', decade:'1950s', 'source':'Null Magazine', 'info':"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture'}
     this.urlbase = 'http://127.0.0.1:5000'
 }
 createtable() {
@@ -45,9 +46,8 @@ nextphoto() {
   .then((resp) => {
       alert(resp.data)})
   */
-}
 
-/*axios(config).then((resp) => {
+    /*axios(config).then((resp) => {
   this.setState({...this.state, 
       filename: resp.data['filename']
   })
@@ -56,6 +56,9 @@ nextphoto() {
 })
 console.log(filename)
 */
+}
+
+
 
 
   
@@ -78,6 +81,10 @@ console.log(filename)
                       </p>
                       <button onClick={this.createtable.bind(this)}>Reset DB</button>
                       <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button>
+                      <NumberPicker defaultValue={1950}
+                        value={value}
+                        onChange={value => setValue(value)}
+                      />
                   </div>                  
               </div>
                 )

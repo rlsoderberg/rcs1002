@@ -29,7 +29,7 @@ def loadpic(x, lines):
     linelist = (line0, line1, line2, line3, line4)
     return linelist
 
-@app.route('/createtable', methods=['GET'])
+@app.route('/createtable', methods=['POST','GET'])
 def createtable():
     print('nextphoto init')
     # Connect to MySQL
@@ -67,7 +67,7 @@ def createtable():
 
     return 'Reset Successful'
 
-@app.route('/nextphoto', methods=['GET'])
+@app.route('/nextphoto')
 def nextphoto():
     print('nextphoto init')
     # Connect to MySQL
@@ -92,13 +92,26 @@ def nextphoto():
 
     print(myresult)
 
-    for n in myresult:
-        #(id, filename, decade, source, info, title) = n
-        (filename) = n
-    json = request.get_json()
-    filename = json['filename']
+    (id, filename, decade, source, info, title) = myresult
 
-    return jsonify({'filename': filename})
+    return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title })
+
+@app.route('/check', methods=['POST', 'GET'])
+def check():
+    myresult = nextphoto()
+
+    (id, filename, decade, source, info, title) = myresult
+
+    #Does this go here?????????
+    json = request.get_json()
+    userid = json['value']
+
+    if userid == id:
+        correct = True
+    else:
+        correct = False
+
+    return correct
 
 
 
