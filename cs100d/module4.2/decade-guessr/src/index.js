@@ -68,7 +68,7 @@ console.log(filename)
           const address = (filename) => {
             return './photos/' + filename;
           }
-          const [val, setVal] = useState(value)
+          const {count, setCount} = this.state
           return (
               <div className='Main'>
                   <div className = 'img'>
@@ -83,8 +83,8 @@ console.log(filename)
                       <button onClick={this.createtable.bind(this)}>Reset DB</button>
                       <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button>
                       <NumberPicker defaultValue={1950}
-                        value={val}
-                        onChange={val => setVal(val)}
+                        value={count}
+                        onChange={count => setCount(count)}
                       />
                   </div>                  
               </div>
