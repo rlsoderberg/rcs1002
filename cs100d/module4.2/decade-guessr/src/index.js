@@ -35,7 +35,13 @@ nextphoto() {
 
   axios(config).then((resp) => {
     this.setState({...this.state, 
-        filename: resp.data['filename']
+      value: resp.data['value'],
+      id: resp.data['id'],
+      filename: resp.data['filename'],
+      decade: resp.data['decade'],
+      source: resp.data['source'],
+      info: resp.data['info'],
+      title: resp.data['title']
     })
   }).catch(error => {
     console.log(error.response.data)
