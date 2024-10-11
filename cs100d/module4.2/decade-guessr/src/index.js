@@ -68,7 +68,7 @@ console.log(filename)
           const address = (filename) => {
             return './photos/' + filename;
           }
-          const {count, setCount} = this.state
+          const [count, setCount] = this.state
           return (
               <div className='Main'>
                   <div className = 'img'>
