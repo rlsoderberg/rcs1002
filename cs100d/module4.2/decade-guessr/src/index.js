@@ -34,6 +34,7 @@ nextphoto() {
   //what i don't get, is the difference between this and resetdb! 
 
   axios(config).then((resp) => {
+    /*
     this.setState({...this.state, 
       value: resp.data['value'],
       id: resp.data['id'],
@@ -42,6 +43,10 @@ nextphoto() {
       source: resp.data['source'],
       info: resp.data['info'],
       title: resp.data['title']
+    })
+      */
+    this.setState({...this.state, 
+      filename: resp.data['filename']
     })
   }).catch(error => {
     console.log(error.response.data)

@@ -44,10 +44,11 @@ def createtable():
     crsr = conn.cursor()
 
     #Reset Database
-    delet = 'DROP TABLE IF EXISTS `img_table`;'
+    delet = 'DROP TABLE IF EXISTS `test_table`;'
     crsr.execute(delet)
 
-    sql = 'CREATE TABLE `img_table` (`id` INT NOT NULL AUTO_INCREMENT, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
+    sql = 'CREATE TABLE `test_table` (`filename` VARCHAR(200) NULL));'
+    #sql = 'CREATE TABLE `img_table` (`id` INT NOT NULL AUTO_INCREMENT, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
     crsr.execute(sql)
 
     #Read Data
@@ -62,7 +63,7 @@ def createtable():
         #loadpic gets its own function, where you take lines 1-5 from lines
         linelist = loadpic(x, lines)
         (line0, line1, line2, line3, line4) = linelist
-        crsr.execute("INSERT INTO img_table (filename, decade, source, info, title) VALUES (%s, %s, %s, %s, %s)", (line0, line1, line2, line3, line4))
+        crsr.execute("INSERT INTO test_table (filename) VALUES (%s)", (line0))
         conn.commit() 
 
     return 'Reset Successful'
@@ -84,7 +85,7 @@ def nextphoto():
     rand = int(random.random() * 104) + 1
 
     #Select row with random number in sql+-
-    getRow = f"select * from img_table where id = {rand};"
+    getRow = f"select * from test_table where id = {rand};"
     crsr.execute(getRow)
 
     #fetch row
@@ -92,15 +93,15 @@ def nextphoto():
 
     print(myresult)
 
-    (id, filename, decade, source, info, title) = myresult
+    #(id, filename, decade, source, info, title) = myresult
 
-    return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title })
+    #return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title })
 
 @app.route('/check', methods=['POST', 'GET'])
 def check():
     myresult = nextphoto()
 
-    (id, filename, decade, source, info, title) = myresult
+    #(id, filename, decade, source, info, title) = myresult
 
     #Does this go here?????????
     json = request.get_json()
