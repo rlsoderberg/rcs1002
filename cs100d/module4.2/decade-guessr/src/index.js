@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
@@ -63,9 +63,17 @@ nextphoto() {
 console.log(filename)
 */
 }
+onLoginChange(e) {
+  //Keep track of the login value
+  this.setState({...this.state, value: e.target.value})
+}
 
-
-
+/*my comments in render never seem to work!!! here is my cool number picker
+<NumberPicker defaultValue={1950}
+value={count}
+onChange={count => setCount(count)}
+/>
+*/
 
   
       render() { 
@@ -74,7 +82,6 @@ console.log(filename)
           const address = (filename) => {
             return './photos/' + filename;
           }
-          const [count, setCount] = this.state
           return (
               <div className='Main'>
                   <div className = 'img'>
@@ -84,14 +91,12 @@ console.log(filename)
                   <div className = 'desc'>
                       <p>
                           Filename: {filename} <br />
-                          Address: {address(filename)}
+                          Address: {address(filename)} <br />
+                          Value: {value}
                       </p>
                       <button onClick={this.createtable.bind(this)}>Reset DB</button>
                       <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button>
-                      <NumberPicker defaultValue={1950}
-                        value={count}
-                        onChange={count => setCount(count)}
-                      />
+                      <span>year: </span><input value={value} onChange={this.onLoginChange.bind(this)}/>                     
                   </div>                  
               </div>
                 )
