@@ -29,7 +29,7 @@ def loadpic(x, lines):
     linelist = (line0, line1, line2, line3, line4)
     return linelist
 
-@app.route('/createtable', methods=['POST','GET'])
+@app.route('/createtable', methods=['GET'])
 def createtable():
     print('nextphoto init')
     # Connect to MySQL
@@ -44,10 +44,10 @@ def createtable():
     crsr = conn.cursor()
 
     #Reset Database
-    delet = 'DROP TABLE IF EXISTS `img_db`;'
+    delet = 'DROP TABLE IF EXISTS `img_table`;'
     crsr.execute(delet)
 
-    sql = 'CREATE TABLE `img_db` (`id` INT NOT NULL AUTO_INCREMENT, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
+    sql = 'CREATE TABLE `img_table` (`id` INT NOT NULL AUTO_INCREMENT, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
     crsr.execute(sql)
 
     #Read Data
@@ -62,12 +62,12 @@ def createtable():
         #loadpic gets its own function, where you take lines 1-5 from lines
         linelist = loadpic(x, lines)
         (line0, line1, line2, line3, line4) = linelist
-        crsr.execute("INSERT INTO img_db (filename, decade, source, info, title) VALUES (%s, %s, %s, %s, %s)", (line0, line1, line2, line3, line4))
+        crsr.execute("INSERT INTO img_table (filename, decade, source, info, title) VALUES (%s, %s, %s, %s, %s)", (line0, line1, line2, line3, line4))
         conn.commit() 
 
     return 'Reset Successful'
 
-@app.route('/nextphoto')
+@app.route('/nextphoto', methods=['GET'])
 def nextphoto():
     print('nextphoto init')
     # Connect to MySQL
@@ -89,6 +89,8 @@ def nextphoto():
 
     #fetch row
     myresult = crsr.fetchall()
+    conn.commit()
+
 
     #(id, filename, decade, source, info, title) = myresult
     #return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title })
@@ -97,8 +99,8 @@ def nextphoto():
 
 @app.route('/check', methods=['POST', 'GET'])
 def check():
+    #i don't know if this stuff is necessary at all, if i'm getting value out of json... so i never jsonified value. will that be a problem???
     myresult = nextphoto()
-
     (id, filename, decade, source, info, title) = myresult
 
     #Does this go here?????????
