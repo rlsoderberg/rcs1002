@@ -84,19 +84,16 @@ def nextphoto():
     rand = int(random.random() * 104) + 1
 
     #Select row with random number in sql+-
-    getRow = f"select * from img_table where id = {rand};"
-    crsr.execute(getRow)
+    getRow = f"select * from img_table where id = %s;"
+    crsr.execute(getRow, (rand))
 
     #fetch row
     myresult = crsr.fetchall()
 
-    print(myresult)
-
-    (id, filename, decade, source, info, title) = myresult
-
-    return myresult
-
+    #(id, filename, decade, source, info, title) = myresult
     #return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title })
+
+    return(myresult)
 
 @app.route('/check', methods=['POST', 'GET'])
 def check():
@@ -115,7 +112,6 @@ def check():
 
     return myresult
 
-# Rand (I want to eventually have this so it shows info from random rows, or maybe even do it on index so it's easy)
 @app.route('/rand')
 def rand():
     result = check()
