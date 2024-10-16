@@ -94,11 +94,11 @@ def nextphoto():
     print(f'myresult: {myresult}')
 
     (id, filename, decade, source, info, title) = myresult
-    #return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title })
+    return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title })
 
-    print(f'id: {id}')
+    #print(f'id: {id}')
 
-    return str(id)
+    #return str(id)
 
 @app.route('/check', methods=['POST', 'GET'])
 def check():
