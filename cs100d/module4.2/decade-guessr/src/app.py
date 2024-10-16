@@ -90,8 +90,7 @@ def nextphoto():
 
     #fetch row
     myresult = crsr.fetchall()
-
-    print(myresult)
+    return myresult
 
     #(id, filename, decade, source, info, title) = myresult
 
@@ -112,9 +111,11 @@ def check():
     else:
         correct = False
 
-    return correct
+    return myresult
 
 
+result = check()
+print(result)
 
 if __name__ == '__main__':
     app.run()
