@@ -68,7 +68,7 @@ nextphoto() {
 console.log(filename)
 */
 }
-onLoginChange(e) {
+onYearChange(e) {
   //Keep track of the login value
   this.setState({...this.state, value: e.target.value})
 }
@@ -101,7 +101,7 @@ onChange={count => setCount(count)}
                       </p>
                       <button onClick={this.createtable.bind(this)}>Reset DB</button>
                       <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button>
-                      <span>year: </span><input value={value} onChange={this.onLoginChange.bind(this)}/>                     
+                      <span>year: </span><input value={value} onChange={this.onYearChange.bind(this)}/>                     
                   </div>                  
               </div>
                 )
