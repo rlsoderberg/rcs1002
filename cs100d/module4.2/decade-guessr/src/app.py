@@ -106,21 +106,47 @@ def check():
     myresult = nextphoto()
     (id, filename, decade, source, info, title) = myresult
 
+    json = request.get_json()
+    decade = json['decade']
+
     #Does this go here?????????
     json = request.get_json()
-    userid = json['value']
+    year = json['value']
 
-    if userid == id:
-        correct = True
+    userdecade = 'null'
+    if year < 1900:
+        userdecade = '1800s'
+    elif 1899 < year < 1910:
+        userdecade = '1900s'
+    elif 1909 < year < 1920:
+        userdecade = '1910s'
+    elif 1919 < year < 1930:
+        userdecade = '1920s'
+    elif 1929 < year < 1940:
+        userdecade = '1930s'
+    elif 1939 < year < 1950:
+        userdecade = '1940s'
+    elif 1949 < year < 1960:
+        userdecade = '1950s'
+    elif 1959 < year < 1970:
+        userdecade = '1960s'
+    elif 1969 < year < 1980:
+        userdecade = '1970s'
+    elif 1979 < year < 1990:
+        userdecade = '1980s'
+    elif 1989 < year < 2000:
+        userdecade = '1990s'
+    elif 1999 < year < 2010:
+        userdecade = '2000s'
+    elif 2009 < year < 2020:
+        userdecade = '2010s' 
+
+    if decade == userdecade:
+        correct = 'CORRECT'
     else:
-        correct = False
+        correct = 'INCORRECT'
 
-    return correct
-
-@app.route('/rand')
-def rand():
-    result = check()
-    return(result)
+    return jsonify({'correct': correct})
 
 
 if __name__ == '__main__':
