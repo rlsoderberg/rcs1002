@@ -13,6 +13,9 @@ class Main extends React.Component {
 createtable() {
   axios.get(this.urlbase + '/createtable').then((resp) => {
       alert(resp.data)
+    })
+      .catch(error => {
+        console.log(error.response.data)
   })
 }
 nextphoto() {
