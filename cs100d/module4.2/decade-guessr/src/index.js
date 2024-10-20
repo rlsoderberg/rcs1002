@@ -18,14 +18,6 @@ createtable() {
         console.log(error.response.data)
   })
 }
-displaydecade() {
-  axios.get(this.urlbase + '/check').then((resp) => {
-      alert(resp.data)
-    })
-      .catch(error => {
-        console.log(error.response.data)
-  })
-}
 /*
 postcorrect() {
   axios.post(this.urlbase + '/check', {correct})
@@ -132,7 +124,6 @@ onChange={count => setCount(count)}
                       </p>
                       <button onClick={this.createtable.bind(this)}>Reset DB</button><br />
                       <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button><br />
-                      <button type="button" onClick={this.displaydecade.bind(this)}>displaydecade</button><br />
                       <span>year: </span><input value={value} onChange={this.onYearChange.bind(this)}/> <br />
                       <button type="button" onClick={this.check.bind(this)}>Check</button>     
                                         

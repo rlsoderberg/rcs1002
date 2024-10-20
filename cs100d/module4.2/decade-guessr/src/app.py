@@ -18,7 +18,22 @@ def index():
 
 @app.route('/check', methods=['POST', 'GET'])
 def check():
-    return 'Hello Check'
+
+
+    json = request.get_json()
+    decade = json['decade']
+
+    json = request.get_json()
+    year = json['value']
+
+    if str(decade) == str(year):
+        correct = 'CORRECT'
+    else:
+        correct = 'INCORRECT'
+
+    return jsonify({'correct': correct})
+
+
 
 def loadpic(x, lines):
     #assign variables to different lines of data file (is there an easy way to do this better?)
