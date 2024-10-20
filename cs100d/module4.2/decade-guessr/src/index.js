@@ -18,6 +18,35 @@ createtable() {
         console.log(error.response.data)
   })
 }
+displaydecade() {
+  axios.get(this.urlbase + '/check').then((resp) => {
+      alert(resp.data)
+    })
+      .catch(error => {
+        console.log(error.response.data)
+  })
+}
+/*
+postcorrect() {
+  axios.post(this.urlbase + '/check', {correct})
+  .then((resp) => {alert(resp.data)
+    })
+      .catch(error => {
+        console.log(error.response.data)
+  })
+}
+
+axios.post("api/users/login", { email, password, },config)
+  .then(res=>res.data)
+  .then(data=> {
+    console.log(data);
+    localStorage.setItem('userInfo', JSON.stringify(data));
+    setLoading(false);
+  })
+  .catch(error => {
+    setError(error)
+  })
+    */
 nextphoto() {
   const {filename} = this.state
   var url = '/nextphoto'
@@ -43,7 +72,7 @@ nextphoto() {
 }
 check() {
   const {decade, value} = this.state
-  var url = '/nextphoto'
+  var url = '/check'
   // Store the user's name in a JSON object
   const body = {'decade': decade, 'value': value}
   // We're sending JSON data to our server
@@ -58,8 +87,7 @@ check() {
   }
   axios(config).then((resp) => {
     this.setState({...this.state, 
-      value: resp.data['value'],
-      decade: resp.data['decade']
+      correct: resp.data['correct']
     })
   }).catch(error => {
     console.log(error.response.data)
@@ -105,7 +133,8 @@ onChange={count => setCount(count)}
                       <button onClick={this.createtable.bind(this)}>Reset DB</button><br />
                       <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button><br />
                       <span>year: </span><input value={value} onChange={this.onYearChange.bind(this)}/> <br />
-                      <button type="button" onClick={this.check.bind(this)}>Check</button>                    
+                      <button type="button" onClick={this.check.bind(this)}>Check</button>     
+                      <button type="button" onClick={this.displaydecade.bind(this)}>displaydecade</button>                    
                   </div>                  
               </div>
                 )

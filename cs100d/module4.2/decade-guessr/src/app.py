@@ -141,7 +141,9 @@ def check():
     elif 2009 < year < 2020:
         userdecade = '2010s' 
 
-    if decade == userdecade:
+    #return str(userdecade)
+    correct = 'null'
+    if(str(decade) == str(userdecade)):
         correct = 'CORRECT'
     else:
         correct = 'INCORRECT'
