@@ -16,6 +16,10 @@ CORS(app)
 def index():
     return 'Hello World'
 
+@app.route('/check', methods=['POST', 'GET'])
+def check():
+    return 'Hello Check'
+
 def loadpic(x, lines):
     #assign variables to different lines of data file (is there an easy way to do this better?)
     #make sure to have the right number of things!!!
@@ -96,12 +100,10 @@ def nextphoto():
     (id, filename, decade, source, info, title) = myresult
     return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title })
 
-    #print(f'id: {id}')
-
-    #return str(id)
-
-@app.route('/check', methods=['POST', 'GET'])
-def check():
+#@app.route('/check')#, methods=['POST', 'GET'])
+#def check():
+#    return 'check is checking'
+"""
     #i don't know if this stuff is necessary at all, if i'm getting value out of json... so i never jsonified value. will that be a problem???
     myresult = nextphoto()
     (id, filename, decade, source, info, title) = myresult
@@ -149,7 +151,7 @@ def check():
         correct = 'INCORRECT'
 
     return jsonify({'correct': correct})
-
+"""
 
 if __name__ == '__main__':
     app.run()
