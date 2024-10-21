@@ -70,6 +70,29 @@ nextphoto() {
     console.log(error.response.data)
   })
 }
+nextcorrect() {
+  const {correct} = this.state
+  var url = '/nextcorrect'
+  // Store the user's name in a JSON object
+  const body = {'correct': correct}
+  // We're sending JSON data to our server
+  const headers = { "Content-Type": "application/json" }
+  // Configuration information for the server
+  const config = {
+      url: url,
+      baseURL: this.urlbase,
+      method: 'GET',
+      headers: headers,
+      data: body
+  }
+  axios(config).then((resp) => {
+    this.setState({...this.state, 
+      correct: resp.data['correct']
+    })
+  }).catch(error => {
+    console.log(error.response.data)
+  })
+}
 check() {
   const {decade, value} = this.state
   var url = '/poster'
@@ -134,7 +157,7 @@ onChange={count => setCount(count)}
                       <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button><br />
                       <button type="button" onClick={this.displaydecade.bind(this)}>displaydecade</button><br />
                       <span>year: </span><input value={value} onChange={this.onYearChange.bind(this)}/> <br />
-                      <button type="button" onClick={this.check.bind(this)}>Check</button>     
+                      <button type="button" onClick={this.nextcorrect.bind(this)}>Check</button>     
                                         
                   </div>                  
               </div>

@@ -108,6 +108,13 @@ def nextphoto():
     (id, filename, decade, source, info, title) = myresult
     return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title })
 
+@app.route('/nextcorrect', methods=['GET'])
+def nextcorrect():
+
+    correct = 'CORRECT'
+
+    return jsonify({'correct': correct})
+
 #@app.route('/check')#, methods=['POST', 'GET'])
 #def check():
 #    return 'check is checking'
