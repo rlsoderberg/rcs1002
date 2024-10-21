@@ -16,9 +16,17 @@ CORS(app)
 def index():
     return 'Hello World'
 
-@app.route('/check', methods=['POST', 'GET'])
-def check():
-    return 'Hello Check'
+@app.route('/poster', methods=['POST'])
+def poster():
+    json = request.get_json()(force=True)
+    decade = json['decade']
+
+    json = request.get_json()(force=True)
+    value = json['value']
+
+    correct='POST'
+    return jsonify({'correct': correct, 'decade': decade, 'value': value })
+
 
 def loadpic(x, lines):
     #assign variables to different lines of data file (is there an easy way to do this better?)

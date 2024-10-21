@@ -72,7 +72,7 @@ nextphoto() {
 }
 check() {
   const {decade, value} = this.state
-  var url = '/check'
+  var url = '/poster'
   // Store the user's name in a JSON object
   const body = {'decade': decade, 'value': value}
   // We're sending JSON data to our server
@@ -81,7 +81,7 @@ check() {
   const config = {
       url: url,
       baseURL: this.urlbase,
-      method: ['GET', 'POST'],
+      method: ['POST'],
       headers: headers,
       data: body
   }
