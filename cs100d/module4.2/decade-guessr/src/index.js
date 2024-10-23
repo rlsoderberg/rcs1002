@@ -18,7 +18,7 @@ createtable() {
         console.log(error.response.data)
   })
 }
-displaydecade() {
+check() {
   axios.get(this.urlbase + '/check').then((resp) => {
       alert(resp.data)
     })
@@ -26,27 +26,6 @@ displaydecade() {
         console.log(error.response.data)
   })
 }
-/*
-postcorrect() {
-  axios.post(this.urlbase + '/check', {correct})
-  .then((resp) => {alert(resp.data)
-    })
-      .catch(error => {
-        console.log(error.response.data)
-  })
-}
-
-axios.post("api/users/login", { email, password, },config)
-  .then(res=>res.data)
-  .then(data=> {
-    console.log(data);
-    localStorage.setItem('userInfo', JSON.stringify(data));
-    setLoading(false);
-  })
-  .catch(error => {
-    setError(error)
-  })
-    */
 nextphoto() {
   const {filename} = this.state
   var url = '/nextphoto'
@@ -70,11 +49,11 @@ nextphoto() {
     console.log(error.response.data)
   })
 }
-nextcorrect() {
-  const {correct} = this.state
-  var url = '/nextcorrect'
+nextphotoplusone() {
+  const {filename} = this.state
+  var url = '/nextphotoplusone'
   // Store the user's name in a JSON object
-  const body = {'correct': correct}
+  const body = {'filename': filename}
   // We're sending JSON data to our server
   const headers = { "Content-Type": "application/json" }
   // Configuration information for the server
@@ -87,30 +66,7 @@ nextcorrect() {
   }
   axios(config).then((resp) => {
     this.setState({...this.state, 
-      correct: resp.data['correct']
-    })
-  }).catch(error => {
-    console.log(error.response.data)
-  })
-}
-check() {
-  const {decade, value} = this.state
-  var url = '/poster'
-  // Store the user's name in a JSON object
-  const body = {'decade': decade, 'value': value}
-  // We're sending JSON data to our server
-  const headers = { "Content-Type": "application/json" }
-  // Configuration information for the server
-  const config = {
-      url: url,
-      baseURL: this.urlbase,
-      method: ['POST'],
-      headers: headers,
-      data: body
-  }
-  axios(config).then((resp) => {
-    this.setState({...this.state, 
-      correct: resp.data['correct']
+      filename: resp.data['filename']
     })
   }).catch(error => {
     console.log(error.response.data)
@@ -125,13 +81,6 @@ onCorrectChange(e) {
   //Keep track of the login value
   this.setState({...this.state, correct: e.target.correct})
 }
-
-/*my comments in render never seem to work!!! here is my cool number picker
-<NumberPicker defaultValue={1950}
-value={count}
-onChange={count => setCount(count)}
-/>
-*/
 
   
       render() { 
@@ -154,10 +103,10 @@ onChange={count => setCount(count)}
                           Correct: {correct}
                       </p>
                       <button onClick={this.createtable.bind(this)}>Reset DB</button><br />
-                      <button type="button" onClick={this.nextphoto.bind(this)}>New Photo</button><br />
-                      <button type="button" onClick={this.displaydecade.bind(this)}>displaydecade</button><br />
+                      <button type="button" onClick={this.nextphoto.bind(this)}>Next Photo</button><br />
+                      <button type="button" onClick={this.nextphotoplusone.bind(this)}>Next Photo Plus One</button><br />
                       <span>year: </span><input value={value} onChange={this.onYearChange.bind(this)}/> <br />
-                      <button type="button" onClick={this.nextcorrect.bind(this)}>Check</button>     
+                      <button type="button" onClick={this.check.bind(this)}>Check</button>     
                                         
                   </div>                  
               </div>

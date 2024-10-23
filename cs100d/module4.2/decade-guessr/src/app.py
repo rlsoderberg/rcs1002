@@ -16,17 +16,9 @@ CORS(app)
 def index():
     return 'Hello World'
 
-@app.route('/poster', methods=['POST'])
-def poster():
-    json = request.get_json()(force=True)
-    decade = json['decade']
-
-    json = request.get_json()(force=True)
-    value = json['value']
-
-    correct='POST'
-    return jsonify({'correct': correct, 'decade': decade, 'value': value })
-
+@app.route('/check', methods=['GET'])
+def check():
+    return 'Hello Check'
 
 def loadpic(x, lines):
     #assign variables to different lines of data file (is there an easy way to do this better?)
@@ -106,67 +98,35 @@ def nextphoto():
     print(f'myresult: {myresult}')
 
     (id, filename, decade, source, info, title) = myresult
-    return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title })
+    return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
+@app.route('/nextphotoplusone', methods=['GET'])
+def nextphotoplusone():
+    print('nextphoto init')
+    # Connect to MySQL
+    server = os.environ['DATAHOST']
+    user = os.environ['DATAUSER']
+    pwd = os.environ['DATAPWD']
+    db = os.environ['DATADATABASE']
 
-@app.route('/nextcorrect', methods=['GET'])
-def nextcorrect():
+    conn = pymysql.connect(host=server, user=user, password=pwd, database=db)
+    conn.autocommit(True)
+    crsr = conn.cursor()
 
-    correct = 'CORRECT'
+    #Select random number
+    rand = int(random.random() * 104) + 1
 
-    return jsonify({'correct': correct})
+    #Select row with random number in sql+-
+    getRow = f"select * from img_table where id = %s;"
+    crsr.execute(getRow, (rand))
 
-#@app.route('/check')#, methods=['POST', 'GET'])
-#def check():
-#    return 'check is checking'
-"""
-    #i don't know if this stuff is necessary at all, if i'm getting value out of json... so i never jsonified value. will that be a problem???
-    myresult = nextphoto()
+    #fetch row
+    myresult = crsr.fetchone()
+    conn.commit()
+
+    print(f'myresult: {myresult}')
+
     (id, filename, decade, source, info, title) = myresult
-
-    json = request.get_json()
-    decade = json['decade']
-
-    #Does this go here?????????
-    json = request.get_json()
-    year = json['value']
-
-    userdecade = 'null'
-    if year < 1900:
-        userdecade = '1800s'
-    elif 1899 < year < 1910:
-        userdecade = '1900s'
-    elif 1909 < year < 1920:
-        userdecade = '1910s'
-    elif 1919 < year < 1930:
-        userdecade = '1920s'
-    elif 1929 < year < 1940:
-        userdecade = '1930s'
-    elif 1939 < year < 1950:
-        userdecade = '1940s'
-    elif 1949 < year < 1960:
-        userdecade = '1950s'
-    elif 1959 < year < 1970:
-        userdecade = '1960s'
-    elif 1969 < year < 1980:
-        userdecade = '1970s'
-    elif 1979 < year < 1990:
-        userdecade = '1980s'
-    elif 1989 < year < 2000:
-        userdecade = '1990s'
-    elif 1999 < year < 2010:
-        userdecade = '2000s'
-    elif 2009 < year < 2020:
-        userdecade = '2010s' 
-
-    #return str(userdecade)
-    correct = 'null'
-    if(str(decade) == str(userdecade)):
-        correct = 'CORRECT'
-    else:
-        correct = 'INCORRECT'
-
-    return jsonify({'correct': correct})
-"""
+    return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
 
 if __name__ == '__main__':
     app.run()
