@@ -18,14 +18,16 @@ def index():
 
 @app.route('/check', methods=['POST'])
 def check():
-    myresult = nextphotoplusone()
-    (id, filename, decade, source, info, title) = myresult
+    json = request.get_json()
+    decade = json['decade']
+    print('decade: ' + decade)
     
     json = request.get_json()
     value = json['value']
+    print('value: '+value)
 
     correct = 'null'
-    if str(value) == str(decade):
+    if(str(value) == str(decade)):
         correct = 'CORRECT'
     else:
         correct = 'INCORRECT'

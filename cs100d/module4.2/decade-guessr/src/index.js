@@ -72,29 +72,6 @@ nextphoto() {
     console.log(error.response.data)
   })
 }
-nextphotoplusone() {
-  const {filename} = this.state
-  var url = '/nextphotoplusone'
-  // Store the user's name in a JSON object
-  const body = {'filename': filename}
-  // We're sending JSON data to our server
-  const headers = { "Content-Type": "application/json" }
-  // Configuration information for the server
-  const config = {
-      url: url,
-      baseURL: this.urlbase,
-      method: 'GET',
-      headers: headers,
-      data: body
-  }
-  axios(config).then((resp) => {
-    this.setState({...this.state, 
-      filename: resp.data['filename']
-    })
-  }).catch(error => {
-    console.log(error.response.data)
-  })
-}
 onDecadeChange(e) {
   //Keep track of the login value
   this.setState({...this.state, value: e.target.value})
@@ -104,8 +81,6 @@ onCorrectChange(e) {
   //Keep track of the login value
   this.setState({...this.state, correct: e.target.correct})
 }
-
-  
       render() { 
         
           const {correct, value, id, filename, decade, source, info, title} = this.state
