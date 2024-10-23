@@ -16,9 +16,21 @@ CORS(app)
 def index():
     return 'Hello World'
 
-@app.route('/check', methods=['GET'])
+@app.route('/check', methods=['POST'])
 def check():
-    return 'Hello Check'
+    myresult = nextphotoplusone()
+    (id, filename, decade, source, info, title) = myresult
+    
+    json = request.get_json()
+    value = json['value']
+
+    correct = 'null'
+    if str(value) == str(decade):
+        correct = 'CORRECT'
+    else:
+        correct = 'INCORRECT'
+
+    return jsonify({'correct': correct})
 
 def loadpic(x, lines):
     #assign variables to different lines of data file (is there an easy way to do this better?)
@@ -126,7 +138,7 @@ def nextphotoplusone():
     print(f'myresult: {myresult}')
 
     (id, filename, decade, source, info, title) = myresult
-    return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
+    return myresult
 
 if __name__ == '__main__':
     app.run()

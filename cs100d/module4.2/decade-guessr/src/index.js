@@ -19,11 +19,26 @@ createtable() {
   })
 }
 check() {
-  axios.get(this.urlbase + '/check').then((resp) => {
-      alert(resp.data)
+  const {value, decade} = this.state
+  var url = '/check'
+  // Store the user's name in a JSON object
+  const body = {'value': value, 'decade': decade}
+  // We're sending JSON data to our server
+  const headers = { "Content-Type": "application/json" }
+  // Configuration information for the server
+  const config = {
+      url: url,
+      baseURL: this.urlbase,
+      method: 'POST',
+      headers: headers,
+      data: body
+  }
+  axios(config).then((resp) => {
+    this.setState({...this.state, 
+      correct: resp.data['correct'],
     })
-      .catch(error => {
-        console.log(error.response.data)
+  }).catch(error => {
+    console.log(error.response.data)
   })
 }
 nextphoto() {
@@ -43,7 +58,15 @@ nextphoto() {
   }
   axios(config).then((resp) => {
     this.setState({...this.state, 
-      filename: resp.data['filename']
+      filename: resp.data['filename'],
+
+      value:resp.data['value'],
+      id:resp.data['id'],
+      filename:resp.data['filename'],
+      decade:resp.data['decade'],
+      source:resp.data['source'],
+      info:resp.data['info'],
+      title:resp.data['title']
     })
   }).catch(error => {
     console.log(error.response.data)
@@ -72,7 +95,7 @@ nextphotoplusone() {
     console.log(error.response.data)
   })
 }
-onYearChange(e) {
+onDecadeChange(e) {
   //Keep track of the login value
   this.setState({...this.state, value: e.target.value})
 }
@@ -85,7 +108,7 @@ onCorrectChange(e) {
   
       render() { 
         
-          const {correct, value, id, filename, year, source, info, title} = this.state
+          const {correct, value, id, filename, decade, source, info, title} = this.state
           const address = (filename) => {
             return './photos/' + filename;
           }
@@ -97,15 +120,16 @@ onCorrectChange(e) {
 
                   <div className = 'desc'>
                       <p>
-                          Filename: {filename} <br />
-                          Address: {address(filename)} <br />
-                          Value: {value}
-                          Correct: {correct}
+
+                        Address: {address(filename)} <br />
+                        correct: {correct}<br />
+                        value:{value} <br />
+                        filename:{filename} <br />
+                        decade:{decade} <br />
                       </p>
                       <button onClick={this.createtable.bind(this)}>Reset DB</button><br />
                       <button type="button" onClick={this.nextphoto.bind(this)}>Next Photo</button><br />
-                      <button type="button" onClick={this.nextphotoplusone.bind(this)}>Next Photo Plus One</button><br />
-                      <span>year: </span><input value={value} onChange={this.onYearChange.bind(this)}/> <br />
+                      <span>decade: </span><input value={value} onChange={this.onDecadeChange.bind(this)}/> <br />
                       <button type="button" onClick={this.check.bind(this)}>Check</button>     
                                         
                   </div>                  
