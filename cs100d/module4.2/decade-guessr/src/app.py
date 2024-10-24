@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, send_file, make_response
 from flask_cors import CORS
 import os
 import sys
@@ -6,11 +6,14 @@ from read_data import lines
 import pymysql
 import random
 
-
-
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/get-cut-image',methods=["GET"])
+def get_cut_img():
+   response = make_response(send_file('1843.jpg',mimetype='image/png'))
+   response.headers['Content-Transfer-Encoding']='base64'
+   return response 
 
 # Test API
 @app.route('/')
@@ -34,9 +37,6 @@ def check():
         correct = 'INCORRECT'
 
     return jsonify({'correct': correct, 'value': value, 'decade': decade})
-
-@app.route('/img', methods=['GET','POST'])
-def img():
     json = request.get_json()
     filename = json['filename']
 

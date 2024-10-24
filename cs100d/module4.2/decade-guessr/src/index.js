@@ -10,6 +10,10 @@ class Main extends React.Component {
     this.state = {send: 'null', correct: 'null', value:'0', id:'0', filename:'null.jpg', decade:'1950s', source:'Null Magazine', info:"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture'}
     this.urlbase = 'http://127.0.0.1:5000'
 }
+
+
+
+
 createtable() {
   axios.get(this.urlbase + '/createtable').then((resp) => {
       alert(resp.data)
@@ -110,6 +114,18 @@ onCorrectChange(e) {
 
   
       render() { 
+
+        try {
+          const dataImage = await axios.get(
+            "http://localhost:5000/get-cut-image"
+          );
+          this.setState({
+              images: dataImage.data,
+            });
+          console.log(dataImage.data);
+        } catch (error) {
+          console.log(error);
+        }
         
           const {correct, value, id, filename, decade, source, info, title} = this.state
           const address = (filename) => {
