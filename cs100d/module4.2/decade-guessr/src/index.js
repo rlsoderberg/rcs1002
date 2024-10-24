@@ -18,14 +18,7 @@ createtable() {
         console.log(error.response.data)
   })
 }
-image() {
-  axios.get(this.urlbase + '/testimage').then((resp) => {
-      alert(resp.data)
-    })
-      .catch(error => {
-        console.log(error.response.data)
-  })
-}
+
 check() {
   const {value, decade} = this.state
   var url = '/check'
@@ -81,9 +74,9 @@ nextphoto() {
   })
 }
 
-image() {
+img() {
   const {filename} = this.state
-  var url = '/image'
+  var url = '/img'
   // Store the user's name in a JSON object
   const body = {'filename': filename}
   // We're sending JSON data to our server
@@ -92,7 +85,7 @@ image() {
   const config = {
       url: url,
       baseURL: this.urlbase,
-      method: 'GET',
+      method: ['GET', 'POST'],
       headers: headers,
       data: body
   }

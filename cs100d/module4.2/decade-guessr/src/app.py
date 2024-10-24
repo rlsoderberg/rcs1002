@@ -35,21 +35,14 @@ def check():
 
     return jsonify({'correct': correct, 'value': value, 'decade': decade})
 
-
-
-@app.route('/image', methods=['GET', 'POST'])
-def image():
-
-
-
+@app.route('/img', methods=['GET','POST'])
+def img():
     json = request.get_json()
     filename = json['filename']
 
-    return render_template(filename)
-
-    #path = os.path + filename?
-    send = app.send_static_file(filename)
-    return jsonify({'send': send})
+    img = os.path.join('static', 'Image')
+    file = os.path.join(img, filename)
+    return render_template('image_render.html', image=file)
 
 def loadpic(x, lines):
     #assign variables to different lines of data file (is there an easy way to do this better?)
@@ -130,34 +123,6 @@ def nextphoto():
 
     (id, filename, decade, source, info, title) = myresult
     return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
-@app.route('/nextphotoplusone', methods=['GET'])
-def nextphotoplusone():
-    print('nextphoto init')
-    # Connect to MySQL
-    server = os.environ['DATAHOST']
-    user = os.environ['DATAUSER']
-    pwd = os.environ['DATAPWD']
-    db = os.environ['DATADATABASE']
-
-    conn = pymysql.connect(host=server, user=user, password=pwd, database=db)
-    conn.autocommit(True)
-    crsr = conn.cursor()
-
-    #Select random number
-    rand = int(random.random() * 104) + 1
-
-    #Select row with random number in sql+-
-    getRow = f"select * from img_table where id = %s;"
-    crsr.execute(getRow, (rand))
-
-    #fetch row
-    myresult = crsr.fetchone()
-    conn.commit()
-
-    print(f'myresult: {myresult}')
-
-    (id, filename, decade, source, info, title) = myresult
-    return myresult
 
 if __name__ == '__main__':
     app.run()
