@@ -1,10 +1,11 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 import os
 import sys
 from read_data import lines
 import pymysql
 import random
+
 
 
 app = Flask(__name__)
@@ -33,6 +34,22 @@ def check():
         correct = 'INCORRECT'
 
     return jsonify({'correct': correct, 'value': value, 'decade': decade})
+
+
+
+@app.route('/image', methods=['GET', 'POST'])
+def image():
+
+
+
+    json = request.get_json()
+    filename = json['filename']
+
+    return render_template(filename)
+
+    #path = os.path + filename?
+    send = app.send_static_file(filename)
+    return jsonify({'send': send})
 
 def loadpic(x, lines):
     #assign variables to different lines of data file (is there an easy way to do this better?)
