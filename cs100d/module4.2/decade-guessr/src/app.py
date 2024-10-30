@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template, send_file, make_response
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 import os
 import sys
@@ -9,16 +9,10 @@ import random
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/get-cut-image',methods=["GET"])
-def get_cut_img():
-   response = make_response(send_file('1843.jpg',mimetype='image/png'))
-   response.headers['Content-Transfer-Encoding']='base64'
-   return response 
-
 # Test API
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def index():
-    return 'Hello World'
+    return render_template('index.html')
 
 @app.route('/check', methods=['POST'])
 def check():
