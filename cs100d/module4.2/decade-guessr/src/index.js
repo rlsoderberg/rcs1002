@@ -78,9 +78,9 @@ nextphoto() {
   })
 }
 
-img() {
+photo() {
   const {filename} = this.state
-  var url = '/img'
+  var url = '/photo'
   // Store the user's name in a JSON object
   const body = {'filename': filename}
   // We're sending JSON data to our server
@@ -126,6 +126,7 @@ onCorrectChange(e) {
         } catch (error) {
           console.log(error);
         }
+        const 
         
           const {correct, value, id, filename, decade, source, info, title} = this.state
           const address = (filename) => {
@@ -134,7 +135,7 @@ onCorrectChange(e) {
           return (
               <div className='Main'>
                   <div className = 'img'>
-                    <img src = {address(filename)} width="500" height="300" alt="decadeGuessr Photo"></img>
+                    <img src = {window.location.origin + f'/photos/{filename}'} width="500" height="300" alt="decadeGuessr Photo"></img>
                   </div>
 
                   <div className = 'desc'>

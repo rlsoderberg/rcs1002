@@ -9,6 +9,14 @@ import random
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/photo', methods=['GET', 'POST'])
+def display_img():
+    json = request.get_json()
+    filename = json['filename']
+
+    return render_template('index.html', filename=filename)
+
+
 # Test API
 @app.route('/', methods=['GET','POST'])
 def index():
