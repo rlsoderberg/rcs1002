@@ -7,7 +7,7 @@ import NumberPicker from "react-widgets/NumberPicker";
 class Main extends React.Component {
   constructor() {
     super()
-    this.state = {send: 'null', correct: 'null', value:'0', id:'0', filename:'null.jpg', decade:'1950s', source:'Null Magazine', info:"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture'}
+    this.state = {img_src: './photos/null.jpg', send: 'null', correct: 'null', value:'0', id:'0', filename:'null.jpg', decade:'1950s', source:'Null Magazine', info:"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture'}
     this.urlbase = 'http://127.0.0.1:5000'
 }
 
@@ -78,11 +78,11 @@ nextphoto() {
   })
 }
 
-photo() {
-  const {filename} = this.state
+display_img() {
+  const {img_src} = this.state
   var url = '/photo'
   // Store the user's name in a JSON object
-  const body = {'filename': filename}
+  const body = {'img_src': img_src}
   // We're sending JSON data to our server
   const headers = { "Content-Type": "image/png" }
   // Configuration information for the server
@@ -95,7 +95,7 @@ photo() {
   }
   axios(config).then((resp) => {
     this.setState({...this.state, 
-      filename: resp.data['filename'],
+      filename: resp.data['img_src'],
     })
   }).catch(error => {
     console.log(error.response.data)
@@ -114,34 +114,21 @@ onCorrectChange(e) {
 
   
       render() { 
+        const {correct, value, id, filename, decade, source, info, title} = this.state
 
-        try {
-          const dataImage = await axios.get(
-            "http://localhost:5000/get-cut-image"
-          );
-          this.setState({
-              images: dataImage.data,
-            });
-          console.log(dataImage.data);
-        } catch (error) {
-          console.log(error);
+        const img_loc = {
+          string: '/photos/' + {filename} 
         }
-        const 
-        
-          const {correct, value, id, filename, decade, source, info, title} = this.state
-          const address = (filename) => {
-            return './photos/' + filename;
-          }
+      
           return (
               <div className='Main'>
                   <div className = 'img'>
-                    <img src = {window.location.origin + f'/photos/{filename}'} width="500" height="300" alt="decadeGuessr Photo"></img>
+                    <img src = {img_loc} width="500" height="300" alt="decadeGuessr Photo"></img>
                   </div>
 
                   <div className = 'desc'>
                       <p>
-
-                        Address: {address(filename)} <br />
+                        img_loc: {JSON.stringify(img_loc.string)} <br />
                         correct: {correct}<br />
                         value:{value} <br />
                         filename:{filename} <br />
@@ -151,6 +138,7 @@ onCorrectChange(e) {
                       <button type="button" onClick={this.nextphoto.bind(this)}>Next Photo</button><br />
                       <span>decade: </span><input value={value} onChange={this.onDecadeChange.bind(this)}/> <br />
                       <button type="button" onClick={this.check.bind(this)}>Check</button>
+                      <button type="button" onClick={this.display_img.bind(this)}>Display Photo</button>
                                         
                   </div>                  
               </div>

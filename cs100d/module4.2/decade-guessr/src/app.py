@@ -11,10 +11,11 @@ CORS(app)
 
 @app.route('/photo', methods=['GET', 'POST'])
 def display_img():
-    json = request.get_json()
-    filename = json['filename']
+    #json = request.get_json()
+    #img_src = json['img_src']
+    img_src = './photos/null.jpg'
 
-    return render_template('index.html', filename=filename)
+    return render_template('index.html', img_src=img_src)
 
 
 # Test API
