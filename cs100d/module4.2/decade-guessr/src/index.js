@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
 import NumberPicker from "react-widgets/NumberPicker";
+import Diamond from './photos/null.jpg';
+
 
 class Main extends React.Component {
   constructor() {
@@ -125,7 +127,7 @@ onCorrectChange(e) {
           return (
               <div className='Main'>
                   <div className = 'img'>
-                    <img src = {img_loc.string} width="500" height="300" alt="decadeGuessr Photo"></img>
+                    <img src = {img_loc} width="500" height="300" alt="decadeGuessr Photo"></img>
                   </div>
 
                   <div className = 'desc'>
