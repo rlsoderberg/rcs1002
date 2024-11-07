@@ -56,8 +56,9 @@ def loadpic(x, lines):
     line2 = lines[x+2]
     line3 = lines[x+3]
     line4 = lines[x+4]
+    line5 = lines[x+5]
 
-    linelist = (line0, line1, line2, line3, line4)
+    linelist = (line0, line1, line2, line3, line4, line5)
     return linelist
 
 @app.route('/createtable', methods=['GET'])

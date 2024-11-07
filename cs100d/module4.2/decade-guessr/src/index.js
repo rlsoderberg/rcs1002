@@ -116,7 +116,7 @@ onCorrectChange(e) {
 
   
       render() { 
-        const {correct, value, id, filename, decade, source, info, title} = this.state
+        const {url, correct, value, id, filename, decade, source, info, title} = this.state
 
         const img_loc = {
           string: '/photos/' + filename
@@ -127,11 +127,12 @@ onCorrectChange(e) {
           return (
               <div className='Main'>
                   <div className = 'img'>
-                    <img src = {img_loc} width="500" height="300" alt="decadeGuessr Photo"></img>
+                    <img src = {url} width="500" height="300" alt="decadeGuessr Photo"></img>
                   </div>
 
                   <div className = 'desc'>
                       <p>
+                        url: {url} <br />
                         img_loc: {JSON.stringify(img_loc.string)} <br />
                         correct: {correct}<br />
                         value:{value} <br />
