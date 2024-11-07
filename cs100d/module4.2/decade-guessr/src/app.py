@@ -9,14 +9,6 @@ import random
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/photo', methods=['GET', 'POST'])
-def display_img():
-    #json = request.get_json()
-    #img_src = json['img_src']
-    img_src = './photos/null.jpg'
-
-    return render_template('index.html', img_src=img_src)
-
 
 # Test API
 @app.route('/', methods=['GET','POST'])
@@ -79,7 +71,7 @@ def createtable():
     delet = 'DROP TABLE IF EXISTS `img_table`;'
     crsr.execute(delet)
 
-    sql = 'CREATE TABLE `img_table` (`id` INT NOT NULL AUTO_INCREMENT, `url` VARCHAR(200) NULL,`filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
+    sql = 'CREATE TABLE `img_table` (`url` VARCHAR(200) NULL, `id` INT NOT NULL AUTO_INCREMENT, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
     crsr.execute(sql)
 
     #Read Data
@@ -113,7 +105,7 @@ def nextphoto():
     crsr = conn.cursor()
 
     #Select random number
-    rand = int(random.random() * 104) + 1
+    rand = int(random.random() * 105) + 1
 
     #Select row with random number in sql+-
     getRow = f"select * from img_table where id = %s;"
@@ -125,8 +117,8 @@ def nextphoto():
 
     print(f'myresult: {myresult}')
 
-    (id, filename, decade, source, info, title) = myresult
-    return jsonify({'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
+    (url, id, filename, decade, source, info, title) = myresult
+    return jsonify({'url': url, 'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
 
 if __name__ == '__main__':
     app.run()
