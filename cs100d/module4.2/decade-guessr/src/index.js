@@ -117,13 +117,15 @@ onCorrectChange(e) {
         const {correct, value, id, filename, decade, source, info, title} = this.state
 
         const img_loc = {
-          string: '/photos/' + {filename} 
+          string: '/photos/' + filename
         }
+
+        console.log(img_loc.string)
       
           return (
               <div className='Main'>
                   <div className = 'img'>
-                    <img src = {img_loc} width="500" height="300" alt="decadeGuessr Photo"></img>
+                    <img src = {img_loc.string} width="500" height="300" alt="decadeGuessr Photo"></img>
                   </div>
 
                   <div className = 'desc'>
