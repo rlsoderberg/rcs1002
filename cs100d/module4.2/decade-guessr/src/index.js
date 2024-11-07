@@ -9,7 +9,7 @@ import Diamond from './photos/null.jpg';
 class Main extends React.Component {
   constructor() {
     super()
-    this.state = {img_src: './photos/null.jpg', send: 'null', correct: 'null', value:'0', id:'0', filename:'null.jpg', decade:'1950s', source:'Null Magazine', info:"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture'}
+    this.state = {url: 'https://ibb.co/9G8WPmV', img_src: './photos/null.jpg', send: 'null', correct: 'null', value:'0', id:'0', filename:'null.jpg', decade:'1950s', source:'Null Magazine', info:"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture'}
     this.urlbase = 'http://127.0.0.1:5000'
 }
 

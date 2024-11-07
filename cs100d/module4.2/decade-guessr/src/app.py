@@ -78,7 +78,7 @@ def createtable():
     delet = 'DROP TABLE IF EXISTS `img_table`;'
     crsr.execute(delet)
 
-    sql = 'CREATE TABLE `img_table` (`id` INT NOT NULL AUTO_INCREMENT, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
+    sql = 'CREATE TABLE `img_table` (`id` INT NOT NULL AUTO_INCREMENT, `url` VARCHAR(200) NULL,`filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
     crsr.execute(sql)
 
     #Read Data
@@ -89,11 +89,11 @@ def createtable():
     data_file.close()
 
     #Create Table
-    for x in range(0, len(lines), 5):
-        #loadpic gets its own function, where you take lines 1-5 from lines
+    for x in range(0, len(lines), 6):
+        #loadpic gets its own function, where you take lines 1-6 from lines
         linelist = loadpic(x, lines)
-        (line0, line1, line2, line3, line4) = linelist
-        crsr.execute("INSERT INTO img_table (filename, decade, source, info, title) VALUES (%s, %s, %s, %s, %s)", (line0, line1, line2, line3, line4))
+        (line0, line1, line2, line3, line4, line5) = linelist
+        crsr.execute("INSERT INTO img_table (url, filename, decade, source, info, title) VALUES (%s, %s, %s, %s, %s, %s)", (line0, line1, line2, line3, line4, line5))
         conn.commit() 
 
     return 'Reset Successful'
