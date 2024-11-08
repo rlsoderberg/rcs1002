@@ -5,7 +5,6 @@ import axios from 'axios';
 import NumberPicker from "react-widgets/NumberPicker";
 import Diamond from './photos/null.jpg';
 
-
 class Main extends React.Component {
   constructor() {
     super()
@@ -93,6 +92,9 @@ onCorrectChange(e) {
 
   
       render() { 
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<Main />);
+
         const {url, correct, value, id, filename, decade, source, info, title} = this.state
 
         const img_loc = {
@@ -102,13 +104,13 @@ onCorrectChange(e) {
         console.log(img_loc.string)
 
         const strip_loc = JSON.stringify(img_loc.string).trim('\n')
+        const id_string = JSON.stringify(this.state.id).trim('\n')
 
-        const url_const = {url}
-      
+              
           return (
               <div className='Main'>
                   <div className = 'img'>
-                    <img src = {url_const} width="500" height="300" alt="decadeGuessr Photo"></img>
+                    <img src = {id_string} width="500" height="300" alt="decadeGuessr Photo"></img>
                   </div>
 
                   <div className = 'desc'>
