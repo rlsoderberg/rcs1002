@@ -6,10 +6,11 @@ import NumberPicker from "react-widgets/NumberPicker";
 import Diamond from './photos/null.jpg';
 import IMAGES from './images.js';
 
+
 class Main extends React.Component {
   constructor() {
     super()
-    this.state = {id: 'https://ibb.co/9G8WPmV', img_src: './photos/null.jpg', send: 'null', correct: 'null', value:'0', url:'0', filename:'null.jpg', decade:'1950s', source:'Null Magazine', info:"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture'}
+    this.state = {id: '0', addy: 'https://ibb.co/9G8WPmV', filename:'null.jpg', decade:'1950s', source:'Null Magazine', info:"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture', correct: 'null'}
     this.urlbase = 'http://127.0.0.1:5000'
 }
 
@@ -49,27 +50,25 @@ check() {
   })
 }
 nextphoto() {
-  const {filename} = this.state
+  const {id, addy, filename, decade, source, info, title} = this.state
   var url = '/nextphoto'
   // Store the user's name in a JSON object
-  const body = {'filename': filename}
+  const body = {'id': id, 'addy':addy, 'filename': filename, 'decade': decade, 'source':source, 'info':info, 'title':title}
   // We're sending JSON data to our server
   const headers = { "Content-Type": "application/json" }
   // Configuration information for the server
   const config = {
       url: url,
       baseURL: this.urlbase,
-      method: 'GET',
+      method: ['GET', 'POST'],
       headers: headers,
       data: body
   }
   axios(config).then((resp) => {
     this.setState({...this.state, 
-      url:resp.data['url'],
-      filename: resp.data['filename'],
-      value:resp.data['value'],
       id:resp.data['id'],
-      filename:resp.data['filename'],
+      addy:resp.data['addy'],
+      filename: resp.data['filename'],
       decade:resp.data['decade'],
       source:resp.data['source'],
       info:resp.data['info'],
@@ -98,15 +97,10 @@ onCorrectChange(e) {
         root.render(<Main />);
         */
 
-        const {url, correct, value, id, filename, decade, source, info, title} = this.state
-
-        const img_loc = {
-          string: '/photos/' + filename
-        }
+        const {addy, correct, value, id, filename, decade, source, info, title} = this.state
 
         console.log(id)
 
-        const strip_loc = JSON.stringify(img_loc.string).trim('\n')
         const id_string = JSON.stringify(this.state.id).trim('\n')
 
         console.log(id_string)
@@ -121,8 +115,7 @@ onCorrectChange(e) {
                   <div className = 'desc'>
                       <p>
                         id: {id} <br />
-                        url: {url} <br />
-                        img_loc: {strip_loc} <br />
+                        addy: {addy} <br />
                         correct: {correct}<br />
                         value:{value} <br />
                         filename:{filename} <br />

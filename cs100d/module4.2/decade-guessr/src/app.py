@@ -71,7 +71,7 @@ def createtable():
     delet = 'DROP TABLE IF EXISTS `img_table`;'
     crsr.execute(delet)
 
-    sql = 'CREATE TABLE `img_table` (`url` VARCHAR(200) NULL, `id` INT NOT NULL AUTO_INCREMENT, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`));'
+    sql = 'CREATE TABLE `img_table` (`id` INT NOT NULL AUTO_INCREMENT, `addy` VARCHAR(200) NULL, `filename` VARCHAR(200) NULL, `decade` VARCHAR(200) NULL, `source` VARCHAR(200) NULL, `info` VARCHAR(200) NULL, `title` VARCHAR(200) NULL, PRIMARY KEY (`id`))'
     crsr.execute(sql)
 
     #Read Data
@@ -86,12 +86,12 @@ def createtable():
         #loadpic gets its own function, where you take lines 1-6 from lines
         linelist = loadpic(x, lines)
         (line0, line1, line2, line3, line4, line5) = linelist
-        crsr.execute("INSERT INTO img_table (url, filename, decade, source, info, title) VALUES (%s, %s, %s, %s, %s, %s)", (line0, line1, line2, line3, line4, line5))
+        crsr.execute("INSERT INTO img_table (addy, filename, decade, source, info, title) VALUES (%s, %s, %s, %s, %s, %s)", (line0, line1, line2, line3, line4, line5))
         conn.commit() 
 
     return 'Reset Successful'
 
-@app.route('/nextphoto', methods=['GET'])
+@app.route('/nextphoto', methods=['GET', 'POST'])
 def nextphoto():
     print('nextphoto init')
     # Connect to MySQL
@@ -117,8 +117,15 @@ def nextphoto():
 
     print(f'myresult: {myresult}')
 
-    (url, id, filename, decade, source, info, title) = myresult
-    return jsonify({'url': url, 'id': id, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
-
+    #return myresult
+    (id, addy, filename, decade, source, info, title) = myresult
+    return jsonify({'id': id, 'addy': addy, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
+'''
+@app.route('/unpack', methods=['GET', 'POST'])
+def unpack():
+    myresult = nextphoto()
+    (id, addy, filename, decade, source, info, title) = myresult
+    return jsonify({'id': id, 'addy': addy, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
+'''
 if __name__ == '__main__':
     app.run()
