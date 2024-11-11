@@ -115,17 +115,13 @@ def nextphoto():
     myresult = crsr.fetchone()
     conn.commit()
 
-    print(f'myresult: {myresult}')
+    (id, addy, filename, decade, source, info, title) = myresult
 
-    #return myresult
-    (id, addy, filename, decade, source, info, title) = myresult
+    for x in myresult:
+        x = x.strip('\n')
+
+    print(f'myresult: {myresult}')
     return jsonify({'id': id, 'addy': addy, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
-'''
-@app.route('/unpack', methods=['GET', 'POST'])
-def unpack():
-    myresult = nextphoto()
-    (id, addy, filename, decade, source, info, title) = myresult
-    return jsonify({'id': id, 'addy': addy, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
-'''
+
 if __name__ == '__main__':
     app.run()

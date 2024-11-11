@@ -10,7 +10,7 @@ import IMAGES from './images.js';
 class Main extends React.Component {
   constructor() {
     super()
-    this.state = {id: '0', addy: 'https://ibb.co/9G8WPmV', filename:'null.jpg', decade:'1950s', source:'Null Magazine', info:"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture', correct: 'null'}
+    this.state = {id: '0', addy: 'https://ibb.co/9G8WPmV', filename:'null.jpg', decade:'1950s', source:'Null Magazine', info:"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture', value: '', correct: 'null'}
     this.urlbase = 'http://127.0.0.1:5000'
 }
 
@@ -44,6 +44,7 @@ check() {
   axios(config).then((resp) => {
     this.setState({...this.state, 
       correct: resp.data['correct'],
+      
     })
   }).catch(error => {
     console.log(error.response.data)
@@ -92,30 +93,22 @@ onCorrectChange(e) {
 
   
       render() { 
-        /*
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<Main />);
-        */
+        const {id, addy, filename, decade, source, info, title, value, correct} = this.state
 
-        const {addy, correct, value, id, filename, decade, source, info, title} = this.state
+        const addy_string = JSON.stringify(this.state.addy).trim('\n')
 
-        console.log(id)
-
-        const id_string = JSON.stringify(this.state.id).trim('\n')
-
-        console.log(id_string)
 
               
           return (
               <div className='Main'>
                   <div className = 'img'>
-                    <img src = {IMAGES.nullo} width="500" height="300" alt="decadeGuessr Photo"></img>
+                    <img src = {addy_string} width="500" height="300" alt="decadeGuessr Photo"></img>
                   </div>
 
                   <div className = 'desc'>
                       <p>
                         id: {id} <br />
-                        addy: {addy} <br />
+                        addy_string: {addy_string} <br />
                         correct: {correct}<br />
                         value:{value} <br />
                         filename:{filename} <br />
