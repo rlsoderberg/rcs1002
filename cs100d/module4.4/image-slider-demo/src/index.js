@@ -45,6 +45,7 @@ class Main extends React.Component {
     })
   }
   nextphoto() {
+    //debugger
     const {id, addy, filename, decade, source, info, title} = this.state
     var url = '/nextphoto'
     // Store the user's name in a JSON object

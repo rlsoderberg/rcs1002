@@ -51,6 +51,7 @@ check() {
   })
 }
 nextphoto() {
+  debugger
   const {id, addy, filename, decade, source, info, title} = this.state
   var url = '/nextphoto'
   // Store the user's name in a JSON object
@@ -61,11 +62,12 @@ nextphoto() {
   const config = {
       url: url,
       baseURL: this.urlbase,
-      method: ['GET', 'POST'],
+      method: 'POST',
       headers: headers,
       data: body
   }
   axios(config).then((resp) => {
+    debugger
     this.setState({...this.state, 
       id:resp.data['id'],
       addy:resp.data['addy'],

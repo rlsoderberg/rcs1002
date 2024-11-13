@@ -115,10 +115,8 @@ def nextphoto():
     myresult = crsr.fetchone()
     conn.commit()
 
+    print(myresult)
     (id, addy, filename, decade, source, info, title) = myresult
-
-    for x in myresult:
-        x = x.strip('\n')
 
     print(f'myresult: {myresult}')
     return jsonify({'id': id, 'addy': addy, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
