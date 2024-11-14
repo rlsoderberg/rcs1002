@@ -2,20 +2,3 @@ body {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color:#cccccc;
 }
-
-.container{
-  margin-top:20px;
-}
-
-.lrgbutton{
-  width:300px;
-}
-
-.Main{
-  text-align:center;
-}
-
-.btn-group{
-  overflow:hidden;
-}
-

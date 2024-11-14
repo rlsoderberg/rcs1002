@@ -1,119 +1,131 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import axios from 'axios';
-import {IncrementDecrementBtn} from "./IncrementDecrementBtn";
-import SubmitBtn from "./TheSubmit";
+import NumberPicker from "react-widgets/NumberPicker";
+import Diamond from './photos/null.jpg';
+import IMAGES from './images.js';
+
 
 class Main extends React.Component {
-    constructor() {
-        super()
-        //Initial data has no user or counts
-        this.urlbase = 'http://localhost:5000'
-        this.state = {rand:0, id: 0, filename:'', decade:'', source:'', info:'', title:'', count: '', result: ''}
-        this.state = {filename: 'Untitled-1.jpg', decade: '1860s', title: 'Guess which decade the photo is from'}
-    }
-
-    onLoginChange(e) {
-        //Keep track of the login value
-        this.setState({...this.state, filename: e.target.value}) 
-    }   
-    
-    create_table() {
-        axios.get(this.urlbase + '/create_table').then((resp) => {
-            alert(resp.data)
-        })
-    }
-
-    login() {
-            const {filename, decade, title, userdecade, count} = this.state
-            var url = '/login'
-            // Store the user's name in a JSON object
-            const body = {'filename': filename}
-            // We're sending JSON data to our server
-            const headers = { "Content-Type": "application/json" }
-            // Configuration information for the server
-            const config = {
-                url: url,
-                baseURL: this.urlbase,
-                method: 'POST',
-                headers: headers,
-                data: body
-            }
-            // Make the request
-        axios(config).then((resp) => {
-            //When this completes, the response from the server has the count data
-            this.setState({...this.state, 
-                filename: resp.data['filename'], // How many logins for this user?
-                decade: resp.data['decade'],
-                title: resp.data['title']
-            })
-        }).catch(error => {
-            console.log(error)
-        })
-    }
-
-    arrow() {
-        const {count} = this.state
-
-        const counter = document.getElementById('counter');
-        const incrementBtn = document.getElementById('increment');
-        const decrementBtn = document.getElementById('decrement');
-        
-        incrementBtn.addEventListener('click', () => {
-            count = count + 10;
-            counter.textContent = count;
-        });
-        
-        decrementBtn.addEventListener('click', () => {
-            count = count - 10;
-            counter.textContent = count;
-        });
-
-        this.setState({...this.state, 
-            userdecade: count
-
-        }).catch(error => {
-            console.log(error)
-        })
-    }
-
-    create_table() {
-        axios.get(this.urlbase + '/create_table').then((resp) => {
-            alert(resp.data)
-        })
-    }
-
-    render() {
-        const {filename, decade, title, count} = this.state
-        console.log(filename)
-        const address = (filename) => {
-            return './popdecades/' + filename;
-          }
-        return (
-            <div className='Main'>
-                <div className = 'img'>
-                    <img src = {address(filename)} width="500" height="300"></img>
-                </div>
-
-                <div className = 'container'>
-                    <p>{title}</p>
-                    <button type="button" class = "lrgbutton" onClick={this.login.bind(this)}>New Photo</button>
-                </div>
-
-                <div className="container">
-                    <IncrementDecrementBtn minValue={1840} maxValue={2010} />
-                    <p>count:{count}</p>
-                </div>
-
-                <div className = 'container'>
-                    <SubmitBtn/>
-                </div>
-                
-            </div>
-        )
-    }
+  constructor() {
+    super()
+    this.state = {id: '0', addy: 'https://ibb.co/9G8WPmV', filename:'null.jpg', decade:'1950s', source:'Null Magazine', info:"null jello sculpture at 1950 World's Fair in Luxembourg", title:'Null Jello Sculpture', value: '', correct: 'null'}
+    this.urlbase = 'http://127.0.0.1:5000'
 }
+
+
+
+
+createtable() {
+  axios.get(this.urlbase + '/createtable').then((resp) => {
+      alert(resp.data)
+    })
+      .catch(error => {
+        console.log(error.response.data)
+  })
+}
+
+check() {
+  const {value, decade} = this.state
+  var url = '/check'
+  // Store the user's name in a JSON object
+  const body = {'value': value, 'decade': decade}
+  // We're sending JSON data to our server
+  const headers = { "Content-Type": "application/json" }
+  // Configuration information for the server
+  const config = {
+      url: url,
+      baseURL: this.urlbase,
+      method: 'POST',
+      headers: headers,
+      data: body
+  }
+  axios(config).then((resp) => {
+    this.setState({...this.state, 
+      correct: resp.data['correct'],
+      
+    })
+  }).catch(error => {
+    console.log(error.response.data)
+  })
+}
+nextphoto() {
+  debugger
+  const {id, addy, filename, decade, source, info, title} = this.state
+  var url = '/nextphoto'
+  // Store the user's name in a JSON object
+  const body = {'id': id, 'addy':addy, 'filename': filename, 'decade': decade, 'source':source, 'info':info, 'title':title}
+  // We're sending JSON data to our server
+  const headers = { "Content-Type": "application/json" }
+  // Configuration information for the server
+  const config = {
+      url: url,
+      baseURL: this.urlbase,
+      method: 'POST',
+      headers: headers,
+      data: body
+  }
+  axios(config).then((resp) => {
+    debugger
+    this.setState({...this.state, 
+      id:resp.data['id'],
+      addy:resp.data['addy'],
+      filename: resp.data['filename'],
+      decade:resp.data['decade'],
+      source:resp.data['source'],
+      info:resp.data['info'],
+      title:resp.data['title']
+
+    })
+  }).catch(error => {
+    console.log(error.response.data)
+  })
+}
+
+onDecadeChange(e) {
+  //Keep track of the login value
+  this.setState({...this.state, value: e.target.value})
+}
+
+onCorrectChange(e) {
+  //Keep track of the login value
+  this.setState({...this.state, correct: e.target.correct})
+}
+
+  
+      render() { 
+        const {id, addy, filename, decade, source, info, title, value, correct} = this.state
+
+        const addy_string = JSON.stringify(addy).trim('\n')
+
+
+              
+          return (
+              <div className='Main'>
+                  <div className = 'img'>
+                    <img src = {addy_string} width="500" height="300" alt="decadeGuessr Photo"></img>
+                  </div>
+
+                  <div className = 'desc'>
+                      <p>
+                        id: {id} <br />
+                        addy_string: {addy_string} <br />
+                        correct: {correct}<br />
+                        value:{value} <br />
+                        filename:{filename} <br />
+                        decade:{decade} <br />
+                      </p>
+                      <button onClick={this.createtable.bind(this)}>Reset DB</button><br />
+                      <button type="button" onClick={this.nextphoto.bind(this)}>Next Photo</button><br />
+                      <span>decade: </span><input value={value} onChange={this.onDecadeChange.bind(this)}/> <br />
+                      <button type="button" onClick={this.check.bind(this)}>Check</button>                                        
+                  </div>                  
+              </div>
+                )
+              }
+  }
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Main />);

@@ -2,3 +2,5 @@ flask
 flask-cors
 mariadb
 python-dotenv
+axios
+react-widgets
