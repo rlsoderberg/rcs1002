@@ -117,10 +117,14 @@ def nextphoto():
 
     (id, addy, filename, decade, source, info, title) = myresult
 
-    for x in myresult:
+    result_list = list(myresult)
+    string_list = result_list[1:]
+
+    for x in string_list:
         x = x.strip('\n')
 
-    print(f'myresult: {myresult}')
+    print(f'stripped string_list: {string_list}')
+
     return jsonify({'id': id, 'addy': addy, 'filename':filename, 'decade':decade, 'source':source, 'info':info, 'title':title})
 
 if __name__ == '__main__':

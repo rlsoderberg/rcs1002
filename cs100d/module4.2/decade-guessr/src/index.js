@@ -97,7 +97,7 @@ onCorrectChange(e) {
       render() { 
         const {id, addy, filename, decade, source, info, title, value, correct} = this.state
 
-        const addy_string = JSON.stringify(this.state.addy).trim('\n')
+        const addy_string = JSON.stringify(addy).trim('\n')
 
 
               
